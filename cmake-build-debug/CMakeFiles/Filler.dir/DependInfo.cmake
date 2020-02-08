@@ -107,12 +107,13 @@ set(CMAKE_DEPENDS_CHECK_C
   "/Users/snorcros/gits/Filler/ft_printf/srcs/type_unixtime.c" "/Users/snorcros/gits/Filler/cmake-build-debug/CMakeFiles/Filler.dir/ft_printf/srcs/type_unixtime.c.o"
   "/Users/snorcros/gits/Filler/ft_printf/srcs/unixtime.c" "/Users/snorcros/gits/Filler/cmake-build-debug/CMakeFiles/Filler.dir/ft_printf/srcs/unixtime.c.o"
   "/Users/snorcros/gits/Filler/srcs/filler_main.c" "/Users/snorcros/gits/Filler/cmake-build-debug/CMakeFiles/Filler.dir/srcs/filler_main.c.o"
+  "/Users/snorcros/gits/Filler/srcs/logic.c" "/Users/snorcros/gits/Filler/cmake-build-debug/CMakeFiles/Filler.dir/srcs/logic.c.o"
+  "/Users/snorcros/gits/Filler/srcs/parse.c" "/Users/snorcros/gits/Filler/cmake-build-debug/CMakeFiles/Filler.dir/srcs/parse.c.o"
   )
 set(CMAKE_C_COMPILER_ID "AppleClang")
 
 # The include file search paths:
 set(CMAKE_C_TARGET_INCLUDE_PATH
-  "../."
   "../ft_printf/includes"
   "../ft_printf/libft/includes"
   "../includes"

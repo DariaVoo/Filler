@@ -12,8 +12,13 @@
 
 #include "filler.h"
 
-int main(int argc, char **argv)
+int main(void)
 {
+	t_filler filler;
+
+	ft_printf("Heeee\n");
+	logic(&filler);
 	ft_printf("Hi!!");
 	return (0);
 }
+//gcc -Wall -Wextra -Werror srcs/*.c -I ./includes  -I ft_printf/includes -L./ft_printf -lftprintf

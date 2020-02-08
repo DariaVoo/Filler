@@ -44,7 +44,6 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Users/snorcros/gits/Filler/."/>
 					<Add directory="/Users/snorcros/gits/Filler/ft_printf/includes"/>
 					<Add directory="/Users/snorcros/gits/Filler/ft_printf/libft/includes"/>
 					<Add directory="/Users/snorcros/gits/Filler/includes"/>
@@ -70,7 +69,6 @@
 				<Option type="1"/>
 				<Option compiler="gcc"/>
 				<Compiler>
-					<Add directory="/Users/snorcros/gits/Filler/."/>
 					<Add directory="/Users/snorcros/gits/Filler/ft_printf/includes"/>
 					<Add directory="/Users/snorcros/gits/Filler/ft_printf/libft/includes"/>
 					<Add directory="/Users/snorcros/gits/Filler/includes"/>
@@ -90,9 +88,6 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/Users/snorcros/gits/Filler/Makefile">
-			<Option target="Filler"/>
-		</Unit>
 		<Unit filename="/Users/snorcros/gits/Filler/ft_printf/includes/colors.h">
 			<Option target="Filler"/>
 		</Unit>
@@ -423,7 +418,16 @@
 		<Unit filename="/Users/snorcros/gits/Filler/includes/filler.h">
 			<Option target="Filler"/>
 		</Unit>
+		<Unit filename="/Users/snorcros/gits/Filler/includes/libft.h">
+			<Option target="Filler"/>
+		</Unit>
 		<Unit filename="/Users/snorcros/gits/Filler/srcs/filler_main.c">
+			<Option target="Filler"/>
+		</Unit>
+		<Unit filename="/Users/snorcros/gits/Filler/srcs/logic.c">
+			<Option target="Filler"/>
+		</Unit>
+		<Unit filename="/Users/snorcros/gits/Filler/srcs/parse.c">
 			<Option target="Filler"/>
 		</Unit>
 		<Unit filename="/Users/snorcros/gits/Filler/CMakeLists.txt">

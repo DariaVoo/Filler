@@ -23,7 +23,7 @@ int			**create_table(int n, int m)
 	while (++i < n)
 		if (!(ans[i] = (int *)malloc(sizeof(int) * (m))))
 		{
-			free_table(ans, i);
+			free_table((void **)ans, i);
 			return (NULL);
 		}
 		else
@@ -31,39 +31,40 @@ int			**create_table(int n, int m)
 	return (ans);
 }
 
-char		fill_map(t_filler map, char *line)
+void		fill_map(t_filler *map, char *line)
 {
 	int	i;
 	int j;
 
 	i = 0;
 	j = 4;
-	while (get_next_line(0, &line) && i < map.count_y && line[0] != 'P')
+	while (get_next_line(0, &line) && i < map->count_y && line[0] != 'P')
 	{
-		while (line[j] != '\0' && j < map.count_x)
+		while (line[j] != '\0' && j < map->count_x)
 		{
-			if (line[j] == map.player1 || line[j] == map.player1 + 32)
-				map.map[i][j] = -1;
-			else if (line[j] == map.player2 || line[j] == map.player2 + 32)
-				map.map[i][j] = -2;
+			if (line[j] == map->player1_me || line[j] == map->player1_me + 32)
+				map->map[i][j] = -1;
+			else if (line[j] == map->player2 || line[j] == map->player2 + 32)
+				map->map[i][j] = -2;
 			j++;
 		}
+		free(line);
 		i++;
 	}
 }
 
-t_map		create_map(t_filler mmap)
+t_filler	*create_map(t_filler *mmap)
 {
-	int		**map;
 	char	**buf;
 	char	*line;
 
-	buf = ft_strsplit(get_next_line(0, &line), ' ');
+	get_next_line(0, &line);
+	buf = ft_strsplit(line, ' ');
 	free(line);
-	mmap.count_x = ft_atoi(buf[2]);
-	mmap.count_y = ft_atoi(buf[1]);
-	mmap.map = create_table(mmap.count_x, mmap.count_y);
-	free_table(buf, 2);
+	mmap->count_x = ft_atoi(buf[2]);
+	mmap->count_y = ft_atoi(buf[1]);
+	mmap->map = create_table(mmap->count_x, mmap->count_y);
+	free_table((void**)buf, 2);
 	get_next_line(0, &line);
 	free(line);
 	fill_map(mmap, line);
@@ -72,35 +73,43 @@ t_map		create_map(t_filler mmap)
 
 int			ft_username_cmp(const char *s1, const char *s2)
 {
-	while (*s1 != '.' && *s1 && *s2)
+	while (*s1 != '.' && *s2)
 	{
 		if (*s1 != *s2)
 			return ((unsigned char)*s1 - (unsigned char)*s2);
 		s1++;
 		s2++;
 	}
+	if (*s2 != '\0')
+		return (-1);
 	return (0);
 }
 
-t_filler	parse_first(void)
+t_filler	*parse_filler(t_filler *filler)
 {
 	char		*line;
-	t_filler	filler;
 
 	while (get_next_line(0, &line))
-		if (*line == '$' && !ft_username_cmp(line[21], USERNAME))
+	{
+		//ft_printf("%s\n", line);
+		if (*line == '$')
 		{
-			if (line[10] == '1')
+			if (!ft_username_cmp(USERNAME, &line[21]))
 			{
-				filler.player1_me = 'X';
-				filler.player2 = 'O';
+				if (line[10] == '1')
+				{
+					filler->player1_me = 'X';
+					filler->player2 = 'O';
+				}
+				else
+					{
+					filler->player1_me = 'O';
+					filler->player2 = 'X';
+				}
 			}
-			else
-			{
-				filler.player1_me = 'O';
-				filler.player2 = 'X';
-			}
-			break ;
+			break;
 		}
+		free(line);
+	}
 	return (create_map(filler));
 }

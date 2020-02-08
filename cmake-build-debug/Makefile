@@ -2904,6 +2904,60 @@ srcs/filler_main.c.s:
 	$(MAKE) -f CMakeFiles/Filler.dir/build.make CMakeFiles/Filler.dir/srcs/filler_main.c.s
 .PHONY : srcs/filler_main.c.s
 
+srcs/logic.o: srcs/logic.c.o
+
+.PHONY : srcs/logic.o
+
+# target to build an object file
+srcs/logic.c.o:
+	$(MAKE) -f CMakeFiles/Filler.dir/build.make CMakeFiles/Filler.dir/srcs/logic.c.o
+.PHONY : srcs/logic.c.o
+
+srcs/logic.i: srcs/logic.c.i
+
+.PHONY : srcs/logic.i
+
+# target to preprocess a source file
+srcs/logic.c.i:
+	$(MAKE) -f CMakeFiles/Filler.dir/build.make CMakeFiles/Filler.dir/srcs/logic.c.i
+.PHONY : srcs/logic.c.i
+
+srcs/logic.s: srcs/logic.c.s
+
+.PHONY : srcs/logic.s
+
+# target to generate assembly for a file
+srcs/logic.c.s:
+	$(MAKE) -f CMakeFiles/Filler.dir/build.make CMakeFiles/Filler.dir/srcs/logic.c.s
+.PHONY : srcs/logic.c.s
+
+srcs/parse.o: srcs/parse.c.o
+
+.PHONY : srcs/parse.o
+
+# target to build an object file
+srcs/parse.c.o:
+	$(MAKE) -f CMakeFiles/Filler.dir/build.make CMakeFiles/Filler.dir/srcs/parse.c.o
+.PHONY : srcs/parse.c.o
+
+srcs/parse.i: srcs/parse.c.i
+
+.PHONY : srcs/parse.i
+
+# target to preprocess a source file
+srcs/parse.c.i:
+	$(MAKE) -f CMakeFiles/Filler.dir/build.make CMakeFiles/Filler.dir/srcs/parse.c.i
+.PHONY : srcs/parse.c.i
+
+srcs/parse.s: srcs/parse.c.s
+
+.PHONY : srcs/parse.s
+
+# target to generate assembly for a file
+srcs/parse.c.s:
+	$(MAKE) -f CMakeFiles/Filler.dir/build.make CMakeFiles/Filler.dir/srcs/parse.c.s
+.PHONY : srcs/parse.c.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -3222,6 +3276,12 @@ help:
 	@echo "... srcs/filler_main.o"
 	@echo "... srcs/filler_main.i"
 	@echo "... srcs/filler_main.s"
+	@echo "... srcs/logic.o"
+	@echo "... srcs/logic.i"
+	@echo "... srcs/logic.s"
+	@echo "... srcs/parse.o"
+	@echo "... srcs/parse.i"
+	@echo "... srcs/parse.s"
 .PHONY : help
 
 

@@ -24,7 +24,7 @@ HEADERS_LST = filler.h
 HEADERS = $(addprefix $(HEADERS_DIR), $(HEADERS_LST))
 
 SRCS_DIR = srcs/
-SRCS_LST = filler_main.c
+SRCS_LST = filler_main.c parse.c logic.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LST))
 
 OBJ_DIR = objects/

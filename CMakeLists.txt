@@ -1,9 +1,8 @@
 cmake_minimum_required(VERSION 3.15)
-project(Filler)
+project(Filler C)
 
-set(CMAKE_CXX_STANDARD 14)
-
-include_directories(.)
+set(CMAKE_C_STANDARD 11)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wextra -Werror -L -lft")
 include_directories(ft_printf/includes)
 include_directories(ft_printf/libft/includes)
 include_directories(includes)
@@ -122,4 +121,4 @@ add_executable(Filler
         includes/libft.h
         srcs/filler_main.c
         srcs/logic.c
-        Makefile)
+        srcs/parse.c)

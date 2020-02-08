@@ -10,10 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <stdio.h>
+# ifndef FILLER_H
+# define FILLER_H
+
+# include <unistd.h>
+# include <stdlib.h>
 # include "libftprintf.h"
 
-# define USERNAME "snorcros"
+# define USERNAME "abanlin"
 
 typedef struct	s_filler
 {
@@ -23,3 +27,13 @@ typedef struct	s_filler
 	char 	player1_me;
 	char 	player2;
 }				t_filler;
+
+
+void		logic(t_filler *filler);
+t_filler	*parse_filler(t_filler *filler);
+int			**create_table(int n, int m);
+void		fill_map(t_filler *map, char *line);
+t_filler 	*create_map(t_filler *mmap);
+int			ft_username_cmp(const char *s1, const char *s2);
+
+# endif

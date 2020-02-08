@@ -102,6 +102,8 @@ file(REMOVE_RECURSE
   "CMakeFiles/Filler.dir/ft_printf/srcs/type_unixtime.c.o"
   "CMakeFiles/Filler.dir/ft_printf/srcs/unixtime.c.o"
   "CMakeFiles/Filler.dir/srcs/filler_main.c.o"
+  "CMakeFiles/Filler.dir/srcs/logic.c.o"
+  "CMakeFiles/Filler.dir/srcs/parse.c.o"
   "Filler"
   "Filler.pdb"
 )

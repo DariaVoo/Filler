@@ -367,5 +367,20 @@ CMakeFiles/Filler.dir/srcs/filler_main.c.o: ../ft_printf/includes/header_double.
 CMakeFiles/Filler.dir/srcs/filler_main.c.o: ../ft_printf/includes/libft.h
 CMakeFiles/Filler.dir/srcs/filler_main.c.o: ../ft_printf/includes/libftprintf.h
 CMakeFiles/Filler.dir/srcs/filler_main.c.o: ../ft_printf/includes/unixtime.h
+CMakeFiles/Filler.dir/srcs/filler_main.c.o: ../includes/filler.h
 CMakeFiles/Filler.dir/srcs/filler_main.c.o: ../srcs/filler_main.c
+
+CMakeFiles/Filler.dir/srcs/logic.c.o: ../ft_printf/includes/header_double.h
+CMakeFiles/Filler.dir/srcs/logic.c.o: ../ft_printf/includes/libft.h
+CMakeFiles/Filler.dir/srcs/logic.c.o: ../ft_printf/includes/libftprintf.h
+CMakeFiles/Filler.dir/srcs/logic.c.o: ../ft_printf/includes/unixtime.h
+CMakeFiles/Filler.dir/srcs/logic.c.o: ../includes/filler.h
+CMakeFiles/Filler.dir/srcs/logic.c.o: ../srcs/logic.c
+
+CMakeFiles/Filler.dir/srcs/parse.c.o: ../ft_printf/includes/header_double.h
+CMakeFiles/Filler.dir/srcs/parse.c.o: ../ft_printf/includes/libft.h
+CMakeFiles/Filler.dir/srcs/parse.c.o: ../ft_printf/includes/libftprintf.h
+CMakeFiles/Filler.dir/srcs/parse.c.o: ../ft_printf/includes/unixtime.h
+CMakeFiles/Filler.dir/srcs/parse.c.o: ../includes/filler.h
+CMakeFiles/Filler.dir/srcs/parse.c.o: ../srcs/parse.c
 

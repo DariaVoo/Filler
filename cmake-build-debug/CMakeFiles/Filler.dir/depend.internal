@@ -368,4 +368,19 @@ CMakeFiles/Filler.dir/srcs/filler_main.c.o
  ../ft_printf/includes/libft.h
  ../ft_printf/includes/libftprintf.h
  ../ft_printf/includes/unixtime.h
+ ../includes/filler.h
  /Users/snorcros/gits/Filler/srcs/filler_main.c
+CMakeFiles/Filler.dir/srcs/logic.c.o
+ ../ft_printf/includes/header_double.h
+ ../ft_printf/includes/libft.h
+ ../ft_printf/includes/libftprintf.h
+ ../ft_printf/includes/unixtime.h
+ ../includes/filler.h
+ /Users/snorcros/gits/Filler/srcs/logic.c
+CMakeFiles/Filler.dir/srcs/parse.c.o
+ ../ft_printf/includes/header_double.h
+ ../ft_printf/includes/libft.h
+ ../ft_printf/includes/libftprintf.h
+ ../ft_printf/includes/unixtime.h
+ ../includes/filler.h
+ /Users/snorcros/gits/Filler/srcs/parse.c
