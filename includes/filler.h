@@ -10,12 +10,16 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include "libftprintf.h"
+# include <stdio.h>
+# include "libftprintf.h"
 
-typedef struct	s_map
+# define USERNAME "snorcros"
+
+typedef struct	s_filler
 {
 	int 	count_y;
 	int 	count_x;
 	int		**map;
-}				t_map;
+	char 	player1_me;
+	char 	player2;
+}				t_filler;
