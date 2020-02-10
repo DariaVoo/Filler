@@ -41,7 +41,9 @@ void		logic(t_filler *filler);
 t_filler	*parse_filler(t_filler *filler, int fd);
 int			**create_table(int n, int m);
 void 		fill_map_filler(t_filler **filler, int fd);
-t_map		*create_map(t_map *mmap, int fd);
-int			ft_username_cmp(const char *s1, const char *s2);
+t_map		*create_map(t_map *mmap, int fd, const char *word);
+
+
+t_map 	get_pice(int fd);
 
 # endif

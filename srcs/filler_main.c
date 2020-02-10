@@ -37,9 +37,9 @@ int main(void)
 	t_filler filler;
 
 	filler = new_filler();
-	ft_printf("Heeee\n");
+	ft_printf("Hiiii!\n");
 	logic(&filler);
-	ft_printf("Hi!!");
+	ft_printf("END!");
 	return (0);
 }
 //gcc -Wall -Wextra -Werror srcs/*.c -I ./includes  -I ft_printf/includes -L./ft_printf -lftprintf
