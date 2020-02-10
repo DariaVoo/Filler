@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/filler.h"
+#include "filler.h"
 
 int			**create_table(int n, int m)
 {
@@ -44,17 +44,11 @@ void	fill_map_filler(t_filler **filler, int fd)
 		while (j < (*filler)->map.count_x + 4)
 		{
 			if (line[j] == (*filler)->player1_me || line[j] == (*filler)->player1_me + 32)
-			{
 			 	(*filler)->map.map[i][j - 4] = -1;
-			}
 			else if (line[j] == (*filler)->player2 || line[j] == (*filler)->player2 + 32)
-			{
 				(*filler)->map.map[i][j - 4] = -2;
-			}
 			else
-			{
 				(*filler)->map.map[i][j - 4] = 0;
-			}
 			j++;
 		}
 		free(line);
@@ -63,18 +57,17 @@ void	fill_map_filler(t_filler **filler, int fd)
 
 	ft_printf("MAP\n");
 	i = 0;
-	 while (i < (*filler)->map.count_y)
-	 {
-	 	j = 0;
-	 	while (j < (*filler)->map.count_x)
-	 	{
-	 		ft_printf("%3d", (*filler)->map.map[i][j]);
-	 		j++;
-	 	}
-	 	ft_putchar('\n');
-	 	i++;
-	 }
-
+	while (i < (*filler)->map.count_y)
+	{
+		j = 0;
+		while (j < (*filler)->map.count_x)
+		{
+			ft_printf("%3d", (*filler)->map.map[i][j]);
+			j++;
+		}
+		ft_putchar('\n');
+		i++;
+	}
 }
 
 t_map	*create_map(t_map *mmap, int fd, const char *word)
@@ -175,7 +168,7 @@ t_filler	*parse_filler(t_filler *filler, int fd)
 		free(line);
 	}
 	create_map(&filler->map, fd, "Plateau");
-	printf(" me = %c , enemy = %c \n", filler->player1_me, filler->player2);
+	printf("me = %c , enemy = %c \n", filler->player1_me, filler->player2);
 	fill_map_filler(&filler, fd);
 	return (filler);
 }
