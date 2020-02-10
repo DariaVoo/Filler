@@ -14,10 +14,10 @@
 
 void logic(t_filler *filler)
 {
-	int i, j;
+	//int i, j;
 	int fd;
 
-	i = 0;
+	//i = 0;
 	fd = 0;
 	fd = open("test", O_RDONLY);
 	ft_printf("%d\n", fd);

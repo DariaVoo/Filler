@@ -17,7 +17,7 @@ int			**create_table(int n, int m)
 	int **ans;
 	int i;
 
-	i = 0;
+	i = -1;
 	if (!(ans = (int **)malloc(sizeof(int *) * (n))))
 		return (NULL);
 	while (++i < n)
@@ -47,36 +47,31 @@ void	fill_map_filler(t_filler **filler, int fd)
 			{
 			 	(*filler)->map.map[i][j - 4] = -1;
 			}
-			if (line[j] == (*filler)->player2 || line[j] == (*filler)->player2 + 32)
+			else if (line[j] == (*filler)->player2 || line[j] == (*filler)->player2 + 32)
 			{
 				(*filler)->map.map[i][j - 4] = -2;
 			}
-			if (!(line[j] == (*filler)->player2 || line[j] == (*filler)->player2 + 32) && !(line[j] == (*filler)->player1_me || line[j] == (*filler)->player1_me + 32))
+			else
 			{
-				// (*filler)->map.map[i][j - 4] = 0;
-				ft_putnbr(i);
-				ft_putchar(' ');
-				ft_putnbr(j);
-				ft_putchar('\n');
-				// ft_putnbr((*filler)->map.map[i][j - 4]);
+				(*filler)->map.map[i][j - 4] = 0;
 			}
 			j++;
 		}
 		free(line);
 		i++;
 	}
-	// i = 0;
-	// while (i < filler->map.count_y)
-	// {
-	// 	j = 0;
-	// 	while (j < filler->map.count_x)
-	// 	{
-	// 		printf("%3d", filler->map.map[i][j]);
-	// 		j++;
-	// 	}
-	// 	ft_putchar('\n');
-	// 	i++;
-	// }
+	 i = 0;
+	 while (i < (*filler)->map.count_y)
+	 {
+	 	j = 0;
+	 	while (j < (*filler)->map.count_x)
+	 	{
+	 		ft_printf("%3d", (*filler)->map.map[i][j]);
+	 		j++;
+	 	}
+	 	ft_putchar('\n');
+	 	i++;
+	 }
 
 }
 

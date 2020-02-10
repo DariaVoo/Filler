@@ -60,7 +60,25 @@ fcntl.h
 libftprintf.h
 ../includes/libftprintf.h
 
+/Users/snorcros/gits/Filler/includes/filler.h
+unistd.h
+-
+stdlib.h
+-
+fcntl.h
+-
+libftprintf.h
+/Users/snorcros/gits/Filler/includes/libftprintf.h
+
+/Users/snorcros/gits/Filler/srcs/filler_main.c
+filler.h
+/Users/snorcros/gits/Filler/srcs/filler.h
+
 /Users/snorcros/gits/Filler/srcs/logic.c
 filler.h
 /Users/snorcros/gits/Filler/srcs/filler.h
+
+/Users/snorcros/gits/Filler/srcs/parse.c
+../includes/filler.h
+/Users/snorcros/gits/Filler/includes/filler.h
 
