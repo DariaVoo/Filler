@@ -121,4 +121,6 @@ add_executable(Filler
         includes/libft.h
         srcs/filler_main.c
         srcs/logic.c
+        test
+        srcs/test
         srcs/parse.c)

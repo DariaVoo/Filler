@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = filler
+NAME = snorcros.filler
 INCLUDES := -I $(HEADERS_DIR) -I $(LIBFT_HEADERS)
 CFLAGS := -Wall -Wextra -Werror
 LIB_FLAG := -L $(LIBFT_DIR) -lftprintf

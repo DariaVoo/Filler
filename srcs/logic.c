@@ -15,17 +15,25 @@
 void logic(t_filler *filler)
 {
 	int i, j;
+	int fd;
 
-	i =0;
-	j =0;
-	filler = parse_filler(filler);
-	while (i< filler->count_y)
-	{
-		while (j < filler->count_x)
-		{
-			ft_printf("%s\n", filler->map[i][j]);
-			j++;
-		}
-		i++;
-	}
+	i = 0;
+	fd = 0;
+	fd = open("test", O_RDONLY);
+	ft_printf("%d\n", fd);
+	if (fd != -1)
+		filler = parse_filler(filler, fd);
+	close(fd);
+	// while (i< filler->map.count_y)
+	// {
+	// 	j = 0;
+	// 	while (j < filler->map.count_x)
+	// 	{
+	// 		printf("i = %d, j = %d\n", i, j);
+	// 		printf("%d\n", filler->map.map[0][0]);
+	// 		j++;
+	// 	}
+	// 	i++;
+	// }
+	// 		printf("%s\n", "SEGA");
 }

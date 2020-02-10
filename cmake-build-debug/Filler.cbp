@@ -430,6 +430,12 @@
 		<Unit filename="/Users/snorcros/gits/Filler/srcs/parse.c">
 			<Option target="Filler"/>
 		</Unit>
+		<Unit filename="/Users/snorcros/gits/Filler/srcs/test">
+			<Option target="Filler"/>
+		</Unit>
+		<Unit filename="/Users/snorcros/gits/Filler/test">
+			<Option target="Filler"/>
+		</Unit>
 		<Unit filename="/Users/snorcros/gits/Filler/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

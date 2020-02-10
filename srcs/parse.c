@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "filler.h"
+#include "../includes/filler.h"
 
 int			**create_table(int n, int m)
 {
@@ -31,85 +31,108 @@ int			**create_table(int n, int m)
 	return (ans);
 }
 
-void		fill_map(t_filler *map, char *line)
+void	fill_map_filler(t_filler **filler, int fd)
 {
 	int	i;
 	int j;
+	char	*line;
 
 	i = 0;
-	j = 4;
-	while (get_next_line(0, &line) && i < map->count_y && line[0] != 'P')
+	while (get_next_line(fd, &line) && i < (*filler)->map.count_y && line[0] != 'P')
 	{
-		while (line[j] != '\0' && j < map->count_x)
+		j = 4;
+		while (j < (*filler)->map.count_x + 4)
 		{
-			if (line[j] == map->player1_me || line[j] == map->player1_me + 32)
-				map->map[i][j] = -1;
-			else if (line[j] == map->player2 || line[j] == map->player2 + 32)
-				map->map[i][j] = -2;
+			if (line[j] == (*filler)->player1_me || line[j] == (*filler)->player1_me + 32)
+			{
+			 	(*filler)->map.map[i][j - 4] = -1;
+			}
+			if (line[j] == (*filler)->player2 || line[j] == (*filler)->player2 + 32)
+			{
+				(*filler)->map.map[i][j - 4] = -2;
+			}
+			if (!(line[j] == (*filler)->player2 || line[j] == (*filler)->player2 + 32) && !(line[j] == (*filler)->player1_me || line[j] == (*filler)->player1_me + 32))
+			{
+				// (*filler)->map.map[i][j - 4] = 0;
+				ft_putnbr(i);
+				ft_putchar(' ');
+				ft_putnbr(j);
+				ft_putchar('\n');
+				// ft_putnbr((*filler)->map.map[i][j - 4]);
+			}
 			j++;
 		}
 		free(line);
 		i++;
 	}
+	// i = 0;
+	// while (i < filler->map.count_y)
+	// {
+	// 	j = 0;
+	// 	while (j < filler->map.count_x)
+	// 	{
+	// 		printf("%3d", filler->map.map[i][j]);
+	// 		j++;
+	// 	}
+	// 	ft_putchar('\n');
+	// 	i++;
+	// }
+
 }
 
-t_filler	*create_map(t_filler *mmap)
+t_map	*create_map(t_map *mmap, int fd)
 {
 	char	**buf;
 	char	*line;
 
-	get_next_line(0, &line);
+	while (get_next_line(fd, &line) && !ft_strstr(line, "Plateau"))
+		free(line);
 	buf = ft_strsplit(line, ' ');
 	free(line);
 	mmap->count_x = ft_atoi(buf[2]);
 	mmap->count_y = ft_atoi(buf[1]);
 	mmap->map = create_table(mmap->count_x, mmap->count_y);
+
 	free_table((void**)buf, 2);
-	get_next_line(0, &line);
+	get_next_line(fd, &line);
 	free(line);
-	fill_map(mmap, line);
+
 	return (mmap);
 }
 
-int			ft_username_cmp(const char *s1, const char *s2)
-{
-	while (*s1 != '.' && *s2)
-	{
-		if (*s1 != *s2)
-			return ((unsigned char)*s1 - (unsigned char)*s2);
-		s1++;
-		s2++;
-	}
-	if (*s2 != '\0')
-		return (-1);
-	return (0);
-}
-
-t_filler	*parse_filler(t_filler *filler)
+t_filler	*parse_filler(t_filler *filler, int fd)
 {
 	char		*line;
 
-	while (get_next_line(0, &line))
+	while (get_next_line(fd, &line))
 	{
-		//ft_printf("%s\n", line);
+		ft_printf("%s\n", line);
 		if (*line == '$')
 		{
-			if (!ft_username_cmp(USERNAME, &line[21]))
+			if (ft_strstr(line, USERNAME) && ft_strstr(line, "p1"))
 			{
-				if (line[10] == '1')
-				{
-					filler->player1_me = 'X';
-					filler->player2 = 'O';
-				}
-				else
-					{
-					filler->player1_me = 'O';
-					filler->player2 = 'X';
-				}
+				filler->player1_me = 'O';
+				filler->player2 = 'X';
 			}
-			break;
+			else
+			{
+				filler->player1_me = 'X';
+				filler->player2 = 'O';
+			}
+			break ;
 		}
 		free(line);
 	}
-	return (create_map(filler));
+	create_map(&filler->map, fd);
+	printf(" me = %c , enemy = %c \n", filler->player1_me, filler->player2);
+	fill_map_filler(&filler, fd);
+	return (filler);
 }
+/*
+t_map 	get_pice(int fd)
+{
+	t_map	piece;
+
+
+	return ()
+}*/
