@@ -26,7 +26,7 @@ t_filler	*set_distance_on_map(t_filler *filler, int *points_p2)
 		j = 0;
 		while (j < filler->map.count_x)
 		{
-			distance = (i - points_p2[k]) % 500 + (j - points_p2[k + 1]) % 500;
+			distance = abs(i - points_p2[k])  + abs(j - points_p2[k + 1]);
 			if ((distance < filler->map.map[i][j] || filler->map.map[i][j] == 0)
 												&& filler->map.map[i][j] >= 0)
 				filler->map.map[i][j] = distance;
