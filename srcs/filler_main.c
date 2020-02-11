@@ -30,6 +30,7 @@ t_filler new_filler(void)
 	f.player1_me = '\0';
 	f.player2 = '\0';
 	f.count_points_p2 = 0;
+	f.count_points_p1_me = 0;
 	return (f);
 }
 

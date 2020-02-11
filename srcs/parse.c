@@ -44,8 +44,12 @@ void	fill_map_filler(t_filler **filler, int fd)
 		while (j < (*filler)->map.count_x + 4)
 		{
 			if (line[j] == (*filler)->player1_me || line[j] == (*filler)->player1_me + 32)
-			 	(*filler)->map.map[i][j - 4] = -1;
-			else if (line[j] == (*filler)->player2 || line[j] == (*filler)->player2 + 32) {
+			{
+				(*filler)->map.map[i][j - 4] = -1;
+				(*filler)->count_points_p1_me++;
+			}
+			else if (line[j] == (*filler)->player2 || line[j] == (*filler)->player2 + 32)
+			{
 				(*filler)->map.map[i][j - 4] = -2;
 				(*filler)->count_points_p2++;
 			}
