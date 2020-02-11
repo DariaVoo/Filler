@@ -12,13 +12,44 @@
 
 #include "filler.h"
 
-t_filler	*set_distance_on_map(t_filler *filler)
+t_filler	*set_distance_on_map(t_filler *filler, int *points_p2)
 {
+	size_t k;
 	size_t i;
 	size_t j;
+	int		distance;
 
+	k = 0;
 	i = 0;
-	//while ()
+	while (i < filler->map.count_y)
+	{
+		j = 0;
+		while (j < filler->map.count_x)
+		{
+			distance = (i - points_p2[k]) % 500 + (j - points_p2[k + 1]) % 500;
+			if ((distance < filler->map.map[i][j] || filler->map.map[i][j] == 0)
+												&& filler->map.map[i][j] >= 0)
+				filler->map.map[i][j] = distance;
+			j++;
+		}
+		i++;
+	}
+
+
+	ft_printf("TERMOMAP\n");
+	i = 0;
+	while (i < filler->map.count_y)
+	{
+		j = 0;
+		while (j < filler->map.count_x)
+		{
+			ft_printf("%4d ", filler->map.map[i][j]);
+			j++;
+		}
+		ft_putchar('\n');
+		i++;
+	}
+	return (filler);
 }
 
 int	*get_enemy_positions(int count, t_map map)
@@ -71,6 +102,7 @@ void logic(t_filler *filler)
 			ft_printf("%d %d\n", p2_points[k], p2_points[k+1]);
 			k +=2;
 		}
+		filler = set_distance_on_map(filler, p2_points);
 		get_pice(fd);
 	}
 	close(fd);

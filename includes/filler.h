@@ -48,6 +48,7 @@ t_map		*create_map(t_map *mmap, int fd, const char *word);
 
 //logic
 int	*get_enemy_positions(int count, t_map map);
+t_filler	*set_distance_on_map(t_filler *filler, int *points_p2);
 
 t_map 	get_pice(int fd);
 
