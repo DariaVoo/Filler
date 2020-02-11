@@ -32,7 +32,10 @@ typedef struct	s_filler
 	t_map	map;
 	char 	player1_me;
 	char 	player2;
+	int 	count_points_p2;
 }				t_filler;
+
+
 
 
 t_filler	new_filler(void);
@@ -43,6 +46,8 @@ int			**create_table(int n, int m);
 void 		fill_map_filler(t_filler **filler, int fd);
 t_map		*create_map(t_map *mmap, int fd, const char *word);
 
+//logic
+int	*get_enemy_positions(int count, t_map map);
 
 t_map 	get_pice(int fd);
 

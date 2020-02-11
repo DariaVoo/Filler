@@ -45,8 +45,10 @@ void	fill_map_filler(t_filler **filler, int fd)
 		{
 			if (line[j] == (*filler)->player1_me || line[j] == (*filler)->player1_me + 32)
 			 	(*filler)->map.map[i][j - 4] = -1;
-			else if (line[j] == (*filler)->player2 || line[j] == (*filler)->player2 + 32)
+			else if (line[j] == (*filler)->player2 || line[j] == (*filler)->player2 + 32) {
 				(*filler)->map.map[i][j - 4] = -2;
+				(*filler)->count_points_p2++;
+			}
 			else
 				(*filler)->map.map[i][j - 4] = 0;
 			j++;
@@ -160,7 +162,6 @@ t_filler	*parse_filler(t_filler *filler, int fd)
 		free(line);
 	}
 	create_map(&filler->map, fd, "Plateau");
-	printf("me = %c , enemy = %c \n", filler->player1_me, filler->player2);
 	fill_map_filler(&filler, fd);
 	return (filler);
 }
