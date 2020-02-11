@@ -12,6 +12,8 @@
 
 #include "filler.h"
 
+
+
 t_filler	*set_distance_on_map(t_filler *filler, int *points_p2)
 {
 	size_t k;
@@ -69,7 +71,9 @@ int	*get_enemy_positions(int count, t_map map)
 		j = 0;
 		while (j < map.count_x)
 		{
-			if (map.map[i][j] == -2 && k < count)
+			if (map.map[i][j] == -2 && k < count &&
+				map.map[i][j + 1] != -2 && map.map[i][j - 1] != -2 &&
+				map.map[i + 1][j] != -2 && map.map[i - 1][j] != -2)
 			{
 				enemy_pos[k] = i;
 				enemy_pos[k + 1] = j;
@@ -79,7 +83,6 @@ int	*get_enemy_positions(int count, t_map map)
 		}
 		i++;
 	}
-	//enemy_pos[k] = -1;
 	return (enemy_pos);
 }
 
