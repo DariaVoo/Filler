@@ -81,7 +81,7 @@ t_map	*create_map(t_map *mmap, int fd, const char *word)
 	free(line);
 	mmap->count_x = ft_atoi(buf[2]);
 	mmap->count_y = ft_atoi(buf[1]);
-	mmap->map = create_table(mmap->count_x, mmap->count_y);
+	mmap->map = create_table(mmap->count_y, mmap->count_x);
 	free_table((void**)buf, 2);
 	return (mmap);
 }
@@ -97,20 +97,13 @@ void	fill_pice(t_map *map, int fd)
 	while (get_next_line(fd, &line) && i < map->count_y)
 	{
 		j = 0;
-		ft_printf("LINE %s\n", line);
 		while (j < map->count_x)
 		{
-			ft_printf("i %d j %d\n", i, j);
-			if (line[j] == '*') {
-				map->map[i][j] = 1;
-				ft_printf("map is *\n");
-				ft_printf("%d ", map->map[i][j]);
-			}
-			else {
-				map->map[i][j] = 0;
-				ft_printf("map is .\n");
-			}
-			j++;
+				if (line[j] == '*')
+					map->map[i][j] = 1;
+				else
+					map->map[i][j] = 0;
+				j++;
 		}
 		free(line);
 		i++;
@@ -137,7 +130,6 @@ t_map 	get_pice(int fd)
 
 	piece = new_map();
 	create_map(&piece, fd, "Piece");
-	ft_printf("count_x %d\tcount_y %d\n", piece.count_x, piece.count_y);
 	fill_pice(&piece, fd);
 	return (piece);
 }

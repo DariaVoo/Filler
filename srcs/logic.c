@@ -15,14 +15,14 @@
 void logic(t_filler *filler)
 {
 	int		fd;
-	t_map	piece;
+	//t_map	piece;
 
 	fd = 0;
-	fd = open("test", O_RDONLY);
+	fd = open("../test", O_RDONLY);
 	ft_printf("%d\n", fd);
 	if (fd != -1) {
 		filler = parse_filler(filler, fd);
-		piece = get_pice(fd);
+		get_pice(fd);
 	}
 	close(fd);
 
