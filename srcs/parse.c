@@ -38,6 +38,8 @@ void	fill_map_filler(t_filler **filler, int fd)
 	char	*line;
 
 	i = 0;
+	get_next_line(fd, &line);
+	free(line);
 	while (get_next_line(fd, &line) && i < (*filler)->map.count_y && line[0] != 'P')
 	{
 		j = 4;
