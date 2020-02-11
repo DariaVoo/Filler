@@ -62,10 +62,10 @@ t_filler	*set_distance_on_map(t_filler *filler, int *points_p2)
 
 int	*get_positions(int count, t_map map, int idplayer)
 {
-	int		*positions;
-	size_t	i;
-	size_t	j;
-	size_t	k;
+	int	*positions;
+	int	i;
+	int	j;
+	int	k;
 
 	i = 0;
 	k = 0;
@@ -94,9 +94,9 @@ int	*get_positions(int count, t_map map, int idplayer)
 
 int 	check_set_piece(t_map filler, t_map piece, int m_x, int m_y)
 {
-	size_t i;
-	size_t j;
-	int		count_cross;
+	int i;
+	int j;
+	int	count_cross;
 
 	i = 0;
 	j = 0;
@@ -106,11 +106,15 @@ int 	check_set_piece(t_map filler, t_map piece, int m_x, int m_y)
 		j = 0;
 		while (j < piece.count_x && j + m_x < filler.count_x)
 		{
-			if (piece.map[i][j] == 1 && filler.map[i + m_y][j + m_x] == -1)
+			if (piece.map[i][j] == 1 && filler.map[i + m_y][j + m_x] == -2)
+				return (0);
+			else if (piece.map[i][j] == 1 && filler.map[i + m_y][j + m_x] == -1)
+			{
 				if (count_cross == 1)
 					return (0);
 				else
 					count_cross = 1;
+			}
 			j++;
 		}
 		i++;
@@ -118,18 +122,59 @@ int 	check_set_piece(t_map filler, t_map piece, int m_x, int m_y)
 	return (1);
 }
 
-void set_piece(t_filler *filler, t_map piece, int *my_points, int *points2)
+int 	check_square(t_map filler, t_map piece, int m_x, int m_y)
 {
-	size_t k;
-	int		sqare;
+	int i;
+	int j;
+	int		square;
+
+	i = 0;
+	j = 0;
+	square = 0;
+	while (i < piece.count_y && i + m_y < filler.count_y)
+	{
+		j = 0;
+		while (j < piece.count_x && j + m_x < filler.count_x)
+		{
+			if (piece.map[i][j] == 1 && filler.map[i + m_y][j + m_x] == -1)
+				square += filler.map[i + m_y][j + m_x];
+			j++;
+		}
+		i++;
+	}
+	return (1);
+}
+
+t_big_sqr	new_big_sqr(void)
+{
+	t_big_sqr b;
+
+	b.square = 0;
+	b.x = 0;
+	b.y = 0;
+	return (b);
+}
+
+void set_piece(t_filler *filler, t_map piece, int *my_points)
+{
+	int k;
+	t_big_sqr	sq;
+	int		buf_sqr;
 
 	k = 0;
+	sq = new_big_sqr();
 	while (my_points[k] != 0 && k < filler->count_points_p1_me)
 	{
 		if (check_set_piece(filler->map, piece, my_points[k], my_points[k + 1]))
-			//check_sqare
+			if ((buf_sqr = check_square(filler->map, piece, my_points[k], my_points[k + 1]) > sq.square))
+			{
+				sq.square = buf_sqr;
+				sq.x = my_points[k];
+				sq.y = my_points[k + 1];
+			}
 		k++;
 	}
+	ft_printf("ANSWER\nX: %d Y:%d\n", sq.x, sq.y);
 }
 
 void logic(t_filler *filler)
@@ -161,7 +206,7 @@ void logic(t_filler *filler)
 		}
 		filler = set_distance_on_map(filler, p2_points);
 		piece = get_pice(fd);
-		set_piece(filler, piece, my_points, p2_points);
+		set_piece(filler, piece, my_points);
 	}
 	close(fd);
 

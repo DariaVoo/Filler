@@ -37,6 +37,12 @@ typedef struct	s_filler
 }				t_filler;
 
 
+typedef struct	s_big_sqr
+{
+	int 	x;
+	int 	y;
+	int		square;
+}				t_big_sqr;
 
 
 t_filler	new_filler(void);
@@ -52,7 +58,8 @@ int			*get_positions(int count, t_map map, int idplayer);
 t_filler	*set_distance_on_map(t_filler *filler, int *points_p2);
 t_map 		get_pice(int fd);
 
-void		set_piece(t_filler *filler, t_map piece, int *points1, int *points2);
+void		set_piece(t_filler *filler, t_map piece, int *my_points);
 int 		check_set_piece(t_map filler, t_map piece, int m_x, int m_y);
+int 		check_square(t_map filler, t_map piece, int m_x, int m_y);
 
 # endif
