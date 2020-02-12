@@ -37,11 +37,19 @@ t_filler new_filler(void)
 int main(void)
 {
 	t_filler filler;
+	int fd;
+	int k;
 
+	k = 0;
 	filler = new_filler();
 	ft_printf("Hiiii!\n");
-	logic(&filler);
+	fd = logic_first(&filler);
+	if (fd != -1)
+		//while (!k)
+			k = logic(&filler, fd);
+	close(fd);
 	ft_printf("END!");
 	return (0);
 }
 //gcc -Wall -Wextra -Werror srcs/*.c -I ./includes  -I ft_printf/includes -L./ft_printf -lftprintf
+//./filler_vm -p1 players/abanlin.filler  -p2 players/champely.filler -v -f maps/map03

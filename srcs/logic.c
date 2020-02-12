@@ -177,7 +177,7 @@ void set_piece(t_filler *filler, t_map piece, int *my_points)
 	ft_printf("ANSWER\nX: %d Y:%d\n", sq.x, sq.y);
 }
 
-void logic(t_filler *filler)
+int	logic_first(t_filler *filler)
 {
 	int		fd;
 	int 	*p2_points;
@@ -192,6 +192,7 @@ void logic(t_filler *filler)
 		filler = parse_filler(filler, fd);
 		p2_points = get_positions(filler->count_points_p2 * 2, filler->map, -2);
 		my_points = get_positions(filler->count_points_p1_me * 2, filler->map, -1);
+		//Вывод
 		while (k + 1 < filler->count_points_p2 * 2)
 		{
 			ft_printf("%d %d\n", p2_points[k], p2_points[k+1]);
@@ -206,8 +207,57 @@ void logic(t_filler *filler)
 		}
 		filler = set_distance_on_map(filler, p2_points);
 		piece = get_pice(fd);
-		set_piece(filler, piece, my_points);
+		if (filler->player1_me == 'O')
+			set_piece(filler, piece, my_points);
+		free(p2_points);
+		free(my_points);
+		return (fd);
 	}
 	close(fd);
+	return (-1);
+}
 
+
+int	logic(t_filler *filler, int fd)
+{
+	int 	*p2_points;
+	int 	*my_points;
+	char	*line;
+	int	k = 0;
+	t_map	piece;
+
+	get_next_line(fd, &line);
+	if (line[0] != '=')
+		return (0);
+	while (line[0] != '<')
+	{
+		free(line);
+		get_next_line(fd, &line);
+	}
+	if (strrchr(line, filler->player2) != NULL)
+	{
+		fill_map_filler(&filler, fd);
+		p2_points = get_positions(filler->count_points_p2 * 2, filler->map, -2);
+		my_points = get_positions(filler->count_points_p1_me * 2, filler->map, -1);
+		//Вывод
+		/*while (k + 1 < filler->count_points_p2 * 2) {
+			ft_printf("%d %d\n", p2_points[k], p2_points[k + 1]);
+			k += 2;
+		}
+		k = 0;
+		ft_printf("MEEEEEEEEEEEEEEEEEEEEEEE\n");
+		while (k + 1 < filler->count_points_p1_me * 2) {
+			ft_printf("%d %d\n", my_points[k], my_points[k + 1]);
+			k += 2;
+		}*/
+		filler = set_distance_on_map(filler, p2_points);
+		piece = get_pice(fd);
+		set_piece(filler, piece, my_points);
+		free(p2_points);
+		free(my_points);
+		return (1);
+	}
+	else
+		logic(filler, fd);
+	return (1);
 }
