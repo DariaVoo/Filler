@@ -43,10 +43,14 @@ int main(void)
 	k = 0;
 	filler = new_filler();
 	fd = logic_first(&filler);
+	//ft_printf("log first\n");
 	if (fd != -1)
-		while (k > -1)
-			k = logic(&filler, fd);
-	close(fd);
+		while (k > -1) {
+			k = logic(&filler, 0);
+		//	ft_printf("log \n");
+		}
+	//ft_printf("log ");
+	//close(fd);
 	return (0);
 }
 //gcc -Wall -Wextra -Werror srcs/*.c -I ./includes  -I ft_printf/includes -L./ft_printf -lftprintf

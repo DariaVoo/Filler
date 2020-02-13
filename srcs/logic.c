@@ -43,7 +43,7 @@ t_filler	*set_distance_on_map(t_filler *filler, int *points_p2)
 		i++;
 	}
 
-
+/*
 	ft_printf("TERMOMAP\n");
 	i = 0;
 	while (i < filler->map.count_y)
@@ -57,7 +57,7 @@ t_filler	*set_distance_on_map(t_filler *filler, int *points_p2)
 		ft_putchar('\n');
 		i++;
 	}
-
+*/
 	return (filler);
 }
 
@@ -187,7 +187,7 @@ int	logic_first(t_filler *filler)
 	t_map	piece;
 
 	fd = 0;
-	fd = open("../test", O_RDONLY);
+	//fd = open("../test", O_RDONLY);
 	if (fd != -1)
 	{
 		filler = parse_filler(filler, fd);
@@ -215,7 +215,7 @@ int	logic_first(t_filler *filler)
 		free(my_points);
 		return (fd);
 	}
-	close(fd);
+	//close(fd);
 	return (-1);
 }
 
@@ -228,11 +228,13 @@ int	logic(t_filler *filler, int fd)
 	t_map	piece;
 
 	get_next_line(fd, &line);
+	//ft_printf("ggggline %s\n", line);
 	if (line[0] == '=')
 		return (-1);
+	//ft_printf("in logic\n");
 	while (line[0] != '<')
 	{
-		free(line);
+		//ft_printf("line %s\n", line);
 		get_next_line(fd, &line);
 	}
 	if (strrchr(line, filler->player2) != NULL)
@@ -256,6 +258,7 @@ int	logic(t_filler *filler, int fd)
 		set_piece(filler, piece, my_points);
 		free(p2_points);
 		free(my_points);
+		free(line);
 		return (1);
 	}
 	return (0);

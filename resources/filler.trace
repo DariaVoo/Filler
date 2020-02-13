@@ -1,7 +1,7 @@
-seed = 3776
-O: error on input
+seed = 7074
 X: timedout
 ../snorcros.filler: Segfault at 0
-../snorcros.filler won
+O: error on input
+players/superjeannot.filler won
 Score:
-0AGAINST0
+19AGAINST0

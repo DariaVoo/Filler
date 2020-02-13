@@ -39,7 +39,7 @@ void	fill_map_filler(t_filler **filler, int fd)
 
 	i = 0;
 	get_next_line(fd, &line);
-	free(line);
+	//free(line);
 	while (get_next_line(fd, &line) && i < (*filler)->map.count_y && line[0] != 'P')
 	{
 		j = 4;
@@ -59,10 +59,10 @@ void	fill_map_filler(t_filler **filler, int fd)
 				(*filler)->map.map[i][j - 4] = 0;
 			j++;
 		}
-		free(line);
 		i++;
 	}
-
+	free(line);
+/*
 	ft_printf("MAP\n");
 	i = 0;
 	while (i < (*filler)->map.count_y)
@@ -76,7 +76,7 @@ void	fill_map_filler(t_filler **filler, int fd)
 		ft_putchar('\n');
 		i++;
 	}
-
+*/
 }
 
 t_map	*create_map(t_map *mmap, int fd, const char *word)
@@ -85,7 +85,7 @@ t_map	*create_map(t_map *mmap, int fd, const char *word)
 	char	*line;
 
 	while (get_next_line(fd, &line) && !ft_strstr(line, word))
-		free(line);
+		;
 	buf = ft_strsplit(line, ' ');
 	free(line);
 	mmap->count_x = ft_atoi(buf[2]);
@@ -103,6 +103,7 @@ void	fill_pice(t_map *map, int fd)
 	char	*line;
 
 	i = 0;
+	line = NULL;
 	while (get_next_line(fd, &line) && i < map->count_y)
 	{
 		j = 0;
@@ -114,9 +115,10 @@ void	fill_pice(t_map *map, int fd)
 					map->map[i][j] = 0;
 				j++;
 		}
-		free(line);
 		i++;
 	}
+	if (line)
+		free(line);
 /*
 	ft_printf("PIECE\n");
 	i = 0;
@@ -139,8 +141,11 @@ t_map 	get_pice(int fd)
 	t_map	piece;
 
 	piece = new_map();
+	//ft_printf("newmap\n");
 	create_map(&piece, fd, "Piece");
+	//ft_printf("create map\n");
 	fill_pice(&piece, fd);
+	//ft_printf("fiil piece\n");
 	return (piece);
 }
 
@@ -148,8 +153,8 @@ t_filler	*parse_filler(t_filler *filler, int fd)
 {
 	char		*line;
 
-	get_next_line(fd, &line);
-	free(line);
+	//get_next_line(fd, &line);
+	//free(line);
 	while (get_next_line(fd, &line))
 	{
 		if (*line == '$')
@@ -166,9 +171,9 @@ t_filler	*parse_filler(t_filler *filler, int fd)
 			}
 			break ;
 		}
-		free(line);
 	}
 	create_map(&filler->map, fd, "Plateau");
 	fill_map_filler(&filler, fd);
+	free(line);
 	return (filler);
 }
