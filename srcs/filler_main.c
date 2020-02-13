@@ -42,13 +42,11 @@ int main(void)
 
 	k = 0;
 	filler = new_filler();
-	ft_printf("Hiiii!\n");
 	fd = logic_first(&filler);
 	if (fd != -1)
-		//while (!k)
+		while (k > -1)
 			k = logic(&filler, fd);
 	close(fd);
-	ft_printf("END!");
 	return (0);
 }
 //gcc -Wall -Wextra -Werror srcs/*.c -I ./includes  -I ft_printf/includes -L./ft_printf -lftprintf

@@ -1,1 +1,7 @@
-seed = 1843
+seed = 3776
+O: error on input
+X: timedout
+../snorcros.filler: Segfault at 0
+../snorcros.filler won
+Score:
+0AGAINST0

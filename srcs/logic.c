@@ -57,6 +57,7 @@ t_filler	*set_distance_on_map(t_filler *filler, int *points_p2)
 		ft_putchar('\n');
 		i++;
 	}
+
 	return (filler);
 }
 
@@ -77,9 +78,9 @@ int	*get_positions(int count, t_map map, int idplayer)
 		j = 0;
 		while (j < map.count_x)
 		{
-			if (map.map[i][j] == idplayer && k < count &&
-				map.map[i][j + 1] != idplayer && map.map[i][j - 1] != idplayer &&
-				map.map[i + 1][j] != idplayer && map.map[i - 1][j] != idplayer)
+			if (map.map[i][j] == idplayer && k < count)
+				//(map.map[i][j + 1] != idplayer && map.map[i][j - 1] != idplayer &&
+				//map.map[i + 1][j] != idplayer && map.map[i - 1][j] != idplayer))
 			{
 				positions[k] = i;
 				positions[k + 1] = j;
@@ -174,7 +175,8 @@ void set_piece(t_filler *filler, t_map piece, int *my_points)
 			}
 		k++;
 	}
-	ft_printf("ANSWER\nX: %d Y:%d\n", sq.x, sq.y);
+	//ft_printf("ANSWER\n");
+	ft_printf("%d %d\n", sq.x, sq.y);
 }
 
 int	logic_first(t_filler *filler)
@@ -182,18 +184,17 @@ int	logic_first(t_filler *filler)
 	int		fd;
 	int 	*p2_points;
 	int 	*my_points;
-	int	k = 0;
 	t_map	piece;
 
 	fd = 0;
 	fd = open("../test", O_RDONLY);
-	ft_printf("%d\n", fd);
-	if (fd != -1) {
+	if (fd != -1)
+	{
 		filler = parse_filler(filler, fd);
 		p2_points = get_positions(filler->count_points_p2 * 2, filler->map, -2);
 		my_points = get_positions(filler->count_points_p1_me * 2, filler->map, -1);
 		//Вывод
-		while (k + 1 < filler->count_points_p2 * 2)
+		/*while (k + 1 < filler->count_points_p2 * 2)
 		{
 			ft_printf("%d %d\n", p2_points[k], p2_points[k+1]);
 			k +=2;
@@ -204,7 +205,8 @@ int	logic_first(t_filler *filler)
 		{
 			ft_printf("%d %d\n", my_points[k], my_points[k+1]);
 			k +=2;
-		}
+		}*/
+		//ft_printf("FIRST\n");
 		filler = set_distance_on_map(filler, p2_points);
 		piece = get_pice(fd);
 		if (filler->player1_me == 'O')
@@ -223,12 +225,11 @@ int	logic(t_filler *filler, int fd)
 	int 	*p2_points;
 	int 	*my_points;
 	char	*line;
-	int	k = 0;
 	t_map	piece;
 
 	get_next_line(fd, &line);
-	if (line[0] != '=')
-		return (0);
+	if (line[0] == '=')
+		return (-1);
 	while (line[0] != '<')
 	{
 		free(line);
@@ -257,7 +258,5 @@ int	logic(t_filler *filler, int fd)
 		free(my_points);
 		return (1);
 	}
-	else
-		logic(filler, fd);
-	return (1);
+	return (0);
 }

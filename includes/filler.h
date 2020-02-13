@@ -30,7 +30,7 @@ typedef struct	s_map
 typedef struct	s_filler
 {
 	t_map	map;
-	char 	player1_me;
+	char 	player1_me;//always -1 on map
 	char 	player2;
 	int 	count_points_p2;
 	int 	count_points_p1_me;
