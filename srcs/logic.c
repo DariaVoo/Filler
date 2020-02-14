@@ -179,48 +179,49 @@ void set_piece(t_filler *filler, t_map piece, int *my_points)
 	ft_printf("%d %d\n", sq.x, sq.y);
 }
 
-int	logic_first(t_filler *filler)
+int	logic(t_filler *filler, int fd)
 {
-	int		fd;
 	int 	*p2_points;
 	int 	*my_points;
 	t_map	piece;
 
-	fd = 0;
-	fd = open("../test", O_RDONLY);
-	if (fd != -1)
-	{
-		filler = parse_filler(filler, fd);
-		p2_points = get_positions(filler->count_points_p2 * 2, filler->map, -2);
-		my_points = get_positions(filler->count_points_p1_me * 2, filler->map, -1);
-		//Вывод
-		/*while (k + 1 < filler->count_points_p2 * 2)
-		{
-			ft_printf("%d %d\n", p2_points[k], p2_points[k+1]);
-			k +=2;
-		}
-		k = 0;
-		ft_printf("MEEEEEEEEEEEEEEEEEEEEEEE\n");
-		while (k + 1 < filler->count_points_p1_me * 2)
-		{
-			ft_printf("%d %d\n", my_points[k], my_points[k+1]);
-			k +=2;
-		}*/
-		//ft_printf("FIRST\n");
-		filler = set_distance_on_map(filler, p2_points);
-		piece = get_pice(fd);
-		if (filler->player1_me == 'O')
-			set_piece(filler, piece, my_points);
-		free(p2_points);
-		free(my_points);
-		return (fd);
-	}
-	close(fd);
-	return (-1);
+
+	fill_map_filler(&filler, fd);
+	p2_points = get_positions(filler->count_points_p2 * 2, filler->map, -2);
+	my_points = get_positions(filler->count_points_p1_me * 2, filler->map, -1);
+	filler = set_distance_on_map(filler, p2_points);
+	piece = get_pice(fd);
+	set_piece(filler, piece, my_points);
+	free(p2_points);
+	free(my_points);
+	return (1);
 }
 
+int	skip_map(int fd, t_filler filler)
+{
+	char	*line;
 
-int	logic(t_filler *filler, int fd)
+	get_next_line(fd, &line);
+	if (line[0] == '=')
+		return (-1);
+	/*while (ft_strstr(line, "<got") == (char *)0
+		&& ft_strrchr(line, filler.player2) == (char *)NULL)
+	{
+		free(line);
+		get_next_line(fd, &line);
+	}*/
+	if (line[0] == '<')
+	{
+		ft_printf("line %s\n", line);
+		free(line);
+		get_next_line(fd, &line);
+		free(line);
+		return (1);
+	}
+	return (0);
+}
+
+int	logicf(t_filler *filler, int fd)
 {
 	int 	*p2_points;
 	int 	*my_points;
@@ -228,13 +229,10 @@ int	logic(t_filler *filler, int fd)
 	t_map	piece;
 
 	get_next_line(fd, &line);
-	//ft_printf("ggggline %s\n", line);
 	if (line[0] == '=')
 		return (-1);
-	//ft_printf("in logic\n");
 	while (line[0] != '<')
 	{
-		//ft_printf("line %s\n", line);
 		get_next_line(fd, &line);
 	}
 	if (strrchr(line, filler->player2) != NULL)

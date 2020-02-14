@@ -42,15 +42,20 @@ int main(void)
 
 	k = 0;
 	filler = new_filler();
-	fd = logic_first(&filler);
-	//ft_printf("log first\n");
+	fd = 0;
+	fd = open("../test", O_RDONLY);
 	if (fd != -1)
-		while (k > -1) {
+	{
+		parse_filler(&filler, fd);
+		if (filler.player1_me == 'O')
+			logic(&filler, fd);
+		//skip map
+		while (skip_map(fd, filler) >= 0)
+		{
 			k = logic(&filler, fd);
-		//	ft_printf("log \n");
 		}
-	//ft_printf("log ");
-	//close(fd);
+	}
+	close(fd);
 	return (0);
 }
 //gcc -Wall -Wextra -Werror srcs/*.c -I ./includes  -I ft_printf/includes -L./ft_printf -lftprintf
