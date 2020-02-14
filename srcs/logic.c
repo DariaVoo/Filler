@@ -164,7 +164,7 @@ void set_piece(t_filler *filler, t_map piece, int *my_points)
 
 	k = 0;
 	sq = new_big_sqr();
-	while (my_points[k] != 0 && k < filler->count_points_p1_me)
+	while (k < filler->count_points_p1_me)
 	{
 		if (check_set_piece(filler->map, piece, my_points[k], my_points[k + 1]))
 			if ((buf_sqr = check_square(filler->map, piece, my_points[k], my_points[k + 1]) > sq.square))
@@ -187,7 +187,7 @@ int	logic_first(t_filler *filler)
 	t_map	piece;
 
 	fd = 0;
-	//fd = open("../test", O_RDONLY);
+	fd = open("../test", O_RDONLY);
 	if (fd != -1)
 	{
 		filler = parse_filler(filler, fd);
@@ -215,7 +215,7 @@ int	logic_first(t_filler *filler)
 		free(my_points);
 		return (fd);
 	}
-	//close(fd);
+	close(fd);
 	return (-1);
 }
 

@@ -46,7 +46,7 @@ int main(void)
 	//ft_printf("log first\n");
 	if (fd != -1)
 		while (k > -1) {
-			k = logic(&filler, 0);
+			k = logic(&filler, fd);
 		//	ft_printf("log \n");
 		}
 	//ft_printf("log ");
