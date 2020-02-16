@@ -240,6 +240,7 @@ int	logicf(t_filler *filler, int fd)
 	}
 	if (strrchr(line, filler->player2) != NULL)
 	{
+
 		fill_map_filler(&filler, fd);
 		p2_points = get_positions(filler->count_points_p2 * 2, filler->map, -2);
 		my_points = get_positions(filler->count_points_p1_me * 2, filler->map, -1);

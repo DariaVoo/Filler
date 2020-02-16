@@ -39,12 +39,15 @@ void	fill_map_filler(t_filler **filler, int fd)
 
 	i = 0;
 	get_next_line(fd, &line);
+
+	(*filler)->count_points_p1_me = 0;
+	(*filler)->count_points_p2 = 0;
 	//free(line);
 	while (i < (*filler)->map.count_y)
 	{
 		get_next_line(fd, &line);
 		j = 4;
-		while (j < (*filler)->map.count_x + 4)
+		while (j < (*filler)->map.count_x + 4 && line)
 		{
 			if (line[j] == (*filler)->player1_me || line[j] == (*filler)->player1_me + 32)
 			{
@@ -88,11 +91,11 @@ t_map	*create_map(t_map *mmap, int fd, const char *word)
 	while (get_next_line(fd, &line) && !ft_strstr(line, word))
 		;
 	buf = ft_strsplit(line, ' ');
-	free(line);
 	mmap->count_x = ft_atoi(buf[2]);
 	mmap->count_y = ft_atoi(buf[1]);
 	mmap->map = create_table(mmap->count_y, mmap->count_x);
 	free_table((void**)buf, 2);
+	free(line);
 	return (mmap);
 }
 
