@@ -188,7 +188,6 @@ int	logic(t_filler *filler, int fd)
 	t_map	piece;
 	int		ans;
 
-
 	fill_map_filler(&filler, fd);
 	p2_points = get_positions(filler->count_points_p2 * 2, filler->map, -2);
 	my_points = get_positions(filler->count_points_p1_me * 2, filler->map, -1);
@@ -205,8 +204,7 @@ int	skip_map(int fd, t_filler filler)
 	char	*line;
 
 	get_next_line(fd, &line);
-	if (line[0] == '=')
-		return (-1);
+
 	/*while (ft_strstr(line, "<got") == (char *)0
 		&& ft_strrchr(line, filler.player2) == (char *)NULL)
 	{
@@ -218,6 +216,11 @@ int	skip_map(int fd, t_filler filler)
 		ft_printf("line %s\n", line);
 		free(line);
 		get_next_line(fd, &line);
+		if (line[0] == '=')
+		{
+			free(line);
+			return (-1);
+		}
 		free(line);
 		return (1);
 	}

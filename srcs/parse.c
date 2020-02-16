@@ -39,7 +39,6 @@ void	fill_map_filler(t_filler **filler, int fd)
 
 	i = 0;
 	get_next_line(fd, &line);
-
 	(*filler)->count_points_p1_me = 0;
 	(*filler)->count_points_p2 = 0;
 	//free(line);
