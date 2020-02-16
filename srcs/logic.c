@@ -151,13 +151,14 @@ t_big_sqr	new_big_sqr(void)
 	t_big_sqr b;
 
 	b.square = 0;
-	b.x = 0;
-	b.y = 0;
+	b.x = -1;
+	b.y = -1;
 	return (b);
 }
 
-void set_piece(t_filler *filler, t_map piece, int *my_points)
+int set_piece(t_filler *filler, t_map piece, int *my_points)
 {
+	//добавить проверку на момент, когда я не могу поставить фигуру -> выходить из программы
 	int k;
 	t_big_sqr	sq;
 	int		buf_sqr;
@@ -177,6 +178,7 @@ void set_piece(t_filler *filler, t_map piece, int *my_points)
 	}
 	//ft_printf("ANSWER\n");
 	ft_printf("%d %d\n", sq.x, sq.y);
+	return (sq.x);
 }
 
 int	logic(t_filler *filler, int fd)
@@ -184,6 +186,7 @@ int	logic(t_filler *filler, int fd)
 	int 	*p2_points;
 	int 	*my_points;
 	t_map	piece;
+	int		ans;
 
 
 	fill_map_filler(&filler, fd);
@@ -191,10 +194,10 @@ int	logic(t_filler *filler, int fd)
 	my_points = get_positions(filler->count_points_p1_me * 2, filler->map, -1);
 	filler = set_distance_on_map(filler, p2_points);
 	piece = get_pice(fd);
-	set_piece(filler, piece, my_points);
+	ans = set_piece(filler, piece, my_points);
 	free(p2_points);
 	free(my_points);
-	return (1);
+	return (ans);
 }
 
 int	skip_map(int fd, t_filler filler)

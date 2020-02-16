@@ -52,7 +52,8 @@ int main(void)
 		//skip map
 		while (skip_map(fd, filler) >= 0)
 		{
-			k = logic(&filler, fd);
+			if (logic(&filler, fd) < 0)
+				;//return (0)
 		}
 	}
 	close(fd);
