@@ -38,9 +38,7 @@ int main(void)
 {
 	t_filler filler;
 	int fd;
-	int k;
 
-	k = 0;
 	filler = new_filler();
 	fd = 0;
 	fd = open("../test", O_RDONLY);
@@ -50,11 +48,13 @@ int main(void)
 		if (filler.player1_me == 'O')
 			logic(&filler, fd);
 		//skip map
-		while (skip_map(fd, filler) >= 0)
+		while (skip_map(fd) >= 0)
 		{
-			if (logic(&filler, fd) < 0)
-				;//return (0)
+			logic(&filler, fd);
+			/*if (logic(&filler, fd) < 0)
+				;//return (0)*/
 		}
+		free_table(filler.map.map, filler.map.count_x);
 	}
 	close(fd);
 	return (0);

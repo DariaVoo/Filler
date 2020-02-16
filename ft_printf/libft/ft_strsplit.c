@@ -130,5 +130,6 @@ char				**ft_strsplit(char const *s, char c)
 		}
 	ans = fill_ans(s, ans, c);
 	ans[strs] = NULL;
+	free(char_word);
 	return (ans);
 }

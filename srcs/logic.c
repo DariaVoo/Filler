@@ -79,8 +79,8 @@ int	*get_positions(int count, t_map map, int idplayer)
 		while (j < map.count_x)
 		{
 			if (map.map[i][j] == idplayer && k < count)
-				//(map.map[i][j + 1] != idplayer && map.map[i][j - 1] != idplayer &&
-				//map.map[i + 1][j] != idplayer && map.map[i - 1][j] != idplayer))
+				//(map.map[i][j + 1] != idplayer || map.map[i][j - 1] != idplayer ||
+				//map.map[i + 1][j] != idplayer || map.map[i - 1][j] != idplayer))
 			{
 				positions[k] = i;
 				positions[k + 1] = j;
@@ -194,23 +194,17 @@ int	logic(t_filler *filler, int fd)
 	filler = set_distance_on_map(filler, p2_points);
 	piece = get_pice(fd);
 	ans = set_piece(filler, piece, my_points);
+	free_table(piece.map, piece.count_x);
 	free(p2_points);
 	free(my_points);
 	return (ans);
 }
 
-int	skip_map(int fd, t_filler filler)
+int	skip_map(int fd)
 {
 	char	*line;
 
 	get_next_line(fd, &line);
-
-	/*while (ft_strstr(line, "<got") == (char *)0
-		&& ft_strrchr(line, filler.player2) == (char *)NULL)
-	{
-		free(line);
-		get_next_line(fd, &line);
-	}*/
 	if (line[0] == '<')
 	{
 		ft_printf("line %s\n", line);
