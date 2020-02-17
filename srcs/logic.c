@@ -22,7 +22,7 @@ static int 	ft_abs(int n)
 
 t_filler	*set_distance_on_map(t_filler *filler, int *points_p2)
 {
-	size_t k;
+	int k;
 	int i;
 	int j;
 	int		distance;
@@ -46,7 +46,7 @@ t_filler	*set_distance_on_map(t_filler *filler, int *points_p2)
 		}
 		i++;
 	}
-
+/*
 	ft_printf("TERMOMAP\n");
 	i = 0;
 	while (i < filler->map.count_y)
@@ -60,7 +60,7 @@ t_filler	*set_distance_on_map(t_filler *filler, int *points_p2)
 		ft_putchar('\n');
 		i++;
 	}
-
+*/
 	return (filler);
 }
 
@@ -103,7 +103,6 @@ int 	check_set_piece(t_map filler, t_map piece, int m_x, int m_y)
 	int	count_cross;
 
 	i = 0;
-	j = 0;
 	count_cross = 0;
 	while (i < piece.count_y && i + m_y < filler.count_y)
 	{
@@ -123,7 +122,7 @@ int 	check_set_piece(t_map filler, t_map piece, int m_x, int m_y)
 		}
 		i++;
 	}
-	return (1);
+	return (count_cross);
 }
 
 int 	check_square(t_map filler, t_map piece, int m_x, int m_y)
@@ -161,7 +160,7 @@ t_big_sqr	new_big_sqr(void)
 
 int set_piece(t_filler *filler, t_map piece, int *my_points)
 {
-	//добавить проверку на момент, когда я не могу поставить фигуру -> выходить из программы
+	//когда я не могу поставить фигуру -> -1 -1
 	int k;
 	t_big_sqr	sq;
 	int		buf_sqr;
@@ -170,7 +169,7 @@ int set_piece(t_filler *filler, t_map piece, int *my_points)
 	sq = new_big_sqr();
 	while (k < filler->count_points_p1_me)
 	{
-		if (check_set_piece(filler->map, piece, my_points[k], my_points[k + 1]))
+		if (check_set_piece(filler->map, piece, my_points[k + 1], my_points[k]))
 			if ((buf_sqr = check_square(filler->map, piece, my_points[k], my_points[k + 1]) > sq.square))
 			{
 				sq.square = buf_sqr;
@@ -179,6 +178,39 @@ int set_piece(t_filler *filler, t_map piece, int *my_points)
 			}
 		k += 2;
 	}
+	//ft_printf("ANSWER\n");
+	ft_printf("%d %d\n", sq.x, sq.y);
+	return (sq.x);
+}
+
+int set_badpiece(t_filler *filler, t_map piece)
+{
+	//когда я не могу поставить фигуру -> -1 -1
+	t_big_sqr	sq;
+	int		buf_sqr;
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	sq = new_big_sqr();
+	while (i < filler->map.count_y)
+	{
+		j = 0;
+		while (j < filler->map.count_x)
+		{
+			if (check_set_piece(filler->map, piece, j, i))
+				if ((buf_sqr = check_square(filler->map, piece, i, j) > sq.square))
+				{
+					sq.square = buf_sqr;
+					sq.x = i;
+					sq.y = j;
+				}
+			j++;
+		}
+		i++;
+	}
+
 	//ft_printf("ANSWER\n");
 	ft_printf("%d %d\n", sq.x, sq.y);
 	return (sq.x);
@@ -196,9 +228,13 @@ int	logic(t_filler *filler, int fd)
 	my_points = get_positions(filler->count_points_p1_me * 2, filler->map, -1);
 	filler = set_distance_on_map(filler, p2_points);
 	piece = get_piece(fd);
-	ans = set_piece(filler, piece, my_points);
+	//if (piece.map[0][0] == '*')
+		ans = set_piece(filler, piece, my_points);
+	//else
+	//	ans = set_badpiece(filler, piece);
 	free_table((void **)piece.map, piece.count_y - 1);
 /*
+	int k =0;
 	while (k + 1 < filler->count_points_p2 * 2) {
 		ft_printf("p2 %d %d\n", p2_points[k], p2_points[k + 1]);
 		k += 2;
@@ -207,7 +243,8 @@ int	logic(t_filler *filler, int fd)
 	while (k + 1 < filler->count_points_p1_me * 2) {
 		ft_printf("me %d %d\n", my_points[k], my_points[k + 1]);
 		k += 2;
-	}*/
+	}
+ */
 	free(p2_points);
 	free(my_points);
 	return (ans);
