@@ -41,7 +41,7 @@ int main(void)
 
 	filler = new_filler();
 	fd = 0;
-	fd = open("test", O_RDONLY);
+	fd = open("../test", O_RDONLY);
 	if (fd != -1)
 	{
 		parse_filler(&filler, fd);

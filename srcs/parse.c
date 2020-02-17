@@ -65,7 +65,7 @@ void	fill_map_filler(t_filler **filler, int fd)
 		i++;
 		free(line);
 	}
-
+/*
 	ft_printf("MAP\n");
 	i = 0;
 	while (i < (*filler)->map.count_y)
@@ -79,7 +79,7 @@ void	fill_map_filler(t_filler **filler, int fd)
 		ft_putchar('\n');
 		i++;
 	}
-
+*/
 }
 
 t_map	*create_map(t_map *mmap, int fd, const char *word)
@@ -121,7 +121,7 @@ void	fill_pice(t_map *map, int fd)
 		i++;
 		free(line);
 	}
-
+/*
 	ft_printf("PIECE\n");
 	i = 0;
 	while (i < map->count_y)
@@ -135,7 +135,7 @@ void	fill_pice(t_map *map, int fd)
 		ft_putchar('\n');
 		i++;
 	}
-
+*/
 }
 
 t_map 	get_piece(int fd)
@@ -171,13 +171,14 @@ t_filler	*parse_filler(t_filler *filler, int fd)
 				filler->player1_me = 'X';
 				filler->player2 = 'O';
 			}
+			free(line);
 			break ;
 		}
 		free(line);
 	}
-	if (line)
-		free(line);
-	ft_printf("ME %c HE %c\n",filler->player1_me, filler->player2);
+	/*if (line)
+		free(line);*/
+//	ft_printf("ME %c HE %c\n",filler->player1_me, filler->player2);
 	create_map(&filler->map, fd, "Plateau");
 	//free(line);
 	return (filler);

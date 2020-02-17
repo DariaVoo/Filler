@@ -27,23 +27,26 @@ t_filler	*set_distance_on_map(t_filler *filler, int *points_p2)
 	int j;
 	int		distance;
 
-	k = 0;
 	i = 0;
 	while (i < filler->map.count_y)
 	{
 		j = 0;
 		while (j < filler->map.count_x)
 		{
-			distance = ft_abs(i - points_p2[k]) + ft_abs(j - points_p2[k + 1]);
-			if ((distance < filler->map.map[i][j] || filler->map.map[i][j] == 0)
-												&& filler->map.map[i][j] >= 0)
-				filler->map.map[i][j] = distance;
+			k = 0;
+			while (k < filler->count_points_p2)
+			{
+				distance = ft_abs(i - points_p2[k]) + ft_abs(j - points_p2[k + 1]);
+				if ((distance < filler->map.map[i][j] || filler->map.map[i][j] == 0)
+					&& filler->map.map[i][j] >= 0)
+					filler->map.map[i][j] = distance;
+				k += 2;
+			}
 			j++;
 		}
 		i++;
 	}
 
-/*
 	ft_printf("TERMOMAP\n");
 	i = 0;
 	while (i < filler->map.count_y)
@@ -57,7 +60,7 @@ t_filler	*set_distance_on_map(t_filler *filler, int *points_p2)
 		ft_putchar('\n');
 		i++;
 	}
-*/
+
 	return (filler);
 }
 
@@ -174,7 +177,7 @@ int set_piece(t_filler *filler, t_map piece, int *my_points)
 				sq.x = my_points[k];
 				sq.y = my_points[k + 1];
 			}
-		k++;
+		k += 2;
 	}
 	//ft_printf("ANSWER\n");
 	ft_printf("%d %d\n", sq.x, sq.y);
@@ -195,6 +198,16 @@ int	logic(t_filler *filler, int fd)
 	piece = get_piece(fd);
 	ans = set_piece(filler, piece, my_points);
 	free_table((void **)piece.map, piece.count_y - 1);
+/*
+	while (k + 1 < filler->count_points_p2 * 2) {
+		ft_printf("p2 %d %d\n", p2_points[k], p2_points[k + 1]);
+		k += 2;
+	}
+	k = 0;
+	while (k + 1 < filler->count_points_p1_me * 2) {
+		ft_printf("me %d %d\n", my_points[k], my_points[k + 1]);
+		k += 2;
+	}*/
 	free(p2_points);
 	free(my_points);
 	return (ans);
@@ -207,7 +220,7 @@ int	skip_map(int fd)
 	get_next_line(fd, &line);
 	if (line[0] == '<')
 	{
-		ft_printf("line %s\n", line);
+		//ft_printf("line %s\n", line);
 		free(line);
 		get_next_line(fd, &line);
 		if (line[0] == '=')

@@ -18,7 +18,7 @@
 #include <fcntl.h>
 # include "libftprintf.h"
 
-# define USERNAME "abanlin"
+# define USERNAME "snorcros"
 
 typedef struct	s_map
 {
