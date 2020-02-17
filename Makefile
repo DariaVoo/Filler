@@ -25,12 +25,12 @@ INCLUDES := -I $(HEADERS_DIR) -I $(LIBFT_HEADERS)
 
 SRCS_DIR = srcs/
 SRCS_LST =  filler.c parse.c logic.c
-OBJ =  objects/filler.o objects/parse.o objects/logic.o
+#OBJ =  objects/filler.o objects/parse.o objects/logic.o
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LST))
 
 OBJ_DIR = objects/
-OBJ_LIST = $(patsubst %.c, %.o, $(SRCS_LST))
-#OBJ	= $(addprefix $(OBJ_DIR), $(OBJ_LST))
+OBJ_LST = $(patsubst %.c, %.o, $(SRCS_LST))
+OBJ	= $(addprefix $(OBJ_DIR), $(OBJ_LST))
 
 all: $(NAME)
 
