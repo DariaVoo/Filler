@@ -11,25 +11,25 @@
 # **************************************************************************** #
 
 NAME = snorcros.filler
-INCLUDES := -I $(HEADERS_DIR) -I $(LIBFT_HEADERS)
 CFLAGS := -Wall -Wextra -Werror
-LIB_FLAG := -L $(LIBFT_DIR) -lftprintf
 
 LIBFT_DIR = ft_printf/
 LIBFT = $(LIBFT_DIR)libftprintf.a
 LIBFT_HEADERS = $(LIBFT_DIR)includes/
+LIB_FLAG := -L $(LIBFT_DIR) -lftprintf
 
 HEADERS_DIR = includes/
 HEADERS_LST = filler.h
 HEADERS = $(addprefix $(HEADERS_DIR), $(HEADERS_LST))
+INCLUDES := -I $(HEADERS_DIR) -I $(LIBFT_HEADERS)
 
 SRCS_DIR = srcs/
-SRCS_LST = filler_main.c parse.c logic.c
+SRCS_LST = parse.c logic.c filler.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LST))
 
 OBJ_DIR = objects/
-OBJ_LST =  $(patsubst %.c, %.o, $(SRCS_LST))
-OBJ = $(addprefix $(OBJ_DIR), $(OBJ_LST))
+OBJ_LIST = $(patsubst %.c, %.o, $(SRCS_LST))
+OBJ	= $(addprefix $(OBJ_DIR), $(OBJ_LST))
 
 all: $(NAME)
 

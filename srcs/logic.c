@@ -192,9 +192,9 @@ int	logic(t_filler *filler, int fd)
 	p2_points = get_positions(filler->count_points_p2 * 2, filler->map, -2);
 	my_points = get_positions(filler->count_points_p1_me * 2, filler->map, -1);
 	filler = set_distance_on_map(filler, p2_points);
-	piece = get_pice(fd);
+	piece = get_piece(fd);
 	ans = set_piece(filler, piece, my_points);
-	free_table(piece.map, piece.count_x);
+	free_table((void **)piece.map, piece.count_y - 1);
 	free(p2_points);
 	free(my_points);
 	return (ans);
@@ -221,28 +221,8 @@ int	skip_map(int fd)
 	return (0);
 }
 
-int	logicf(t_filler *filler, int fd)
-{
-	int 	*p2_points;
-	int 	*my_points;
-	char	*line;
-	t_map	piece;
-
-	get_next_line(fd, &line);
-	if (line[0] == '=')
-		return (-1);
-	while (line[0] != '<')
-	{
-		get_next_line(fd, &line);
-	}
-	if (strrchr(line, filler->player2) != NULL)
-	{
-
-		fill_map_filler(&filler, fd);
-		p2_points = get_positions(filler->count_points_p2 * 2, filler->map, -2);
-		my_points = get_positions(filler->count_points_p1_me * 2, filler->map, -1);
-		//Вывод
-		/*while (k + 1 < filler->count_points_p2 * 2) {
+	/*Вывод координат
+		 * while (k + 1 < filler->count_points_p2 * 2) {
 			ft_printf("%d %d\n", p2_points[k], p2_points[k + 1]);
 			k += 2;
 		}
@@ -252,13 +232,4 @@ int	logicf(t_filler *filler, int fd)
 			ft_printf("%d %d\n", my_points[k], my_points[k + 1]);
 			k += 2;
 		}*/
-		filler = set_distance_on_map(filler, p2_points);
-		piece = get_pice(fd);
-		set_piece(filler, piece, my_points);
-		free(p2_points);
-		free(my_points);
-		free(line);
-		return (1);
-	}
-	return (0);
-}
+

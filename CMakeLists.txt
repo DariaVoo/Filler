@@ -119,7 +119,7 @@ add_executable(Filler
         ft_printf/srcs/unixtime.c
         includes/filler.h
         includes/libft.h
-        srcs/filler_main.c
+        srcs/filler.c
         srcs/logic.c
         srcs/parse.c
         test)

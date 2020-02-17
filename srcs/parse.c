@@ -138,7 +138,7 @@ void	fill_pice(t_map *map, int fd)
 
 }
 
-t_map 	get_pice(int fd)
+t_map 	get_piece(int fd)
 {
 	t_map	piece;
 

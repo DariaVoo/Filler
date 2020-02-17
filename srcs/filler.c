@@ -54,7 +54,7 @@ int main(void)
 			/*if (logic(&filler, fd) < 0)
 				;//return (0)*/
 		}
-		free_table(filler.map.map, filler.map.count_x);
+		free_table((void **)filler.map.map, filler.map.count_y - 1);
 	}
 	close(fd);
 	return (0);
