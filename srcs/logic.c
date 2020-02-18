@@ -122,6 +122,8 @@ int 	check_set_piece(t_map filler, t_map piece, int m_x, int m_y)
 		}
 		i++;
 	}
+	if (i < piece.count_y || j < piece.count_x)
+		count_cross = 0;
 	return (count_cross);
 }
 
@@ -167,7 +169,7 @@ int set_piece(t_filler *filler, t_map piece, int *my_points)
 
 	k = 0;
 	sq = new_big_sqr();
-	while (k < filler->count_points_p1_me)
+	while (k < filler->count_points_p1_me * 2)
 	{
 		if (check_set_piece(filler->map, piece, my_points[k + 1], my_points[k]))
 			if ((buf_sqr = check_square(filler->map, piece, my_points[k], my_points[k + 1]) > sq.square))
@@ -228,10 +230,10 @@ int	logic(t_filler *filler, int fd)
 	my_points = get_positions(filler->count_points_p1_me * 2, filler->map, -1);
 	filler = set_distance_on_map(filler, p2_points);
 	piece = get_piece(fd);
-	//if (piece.map[0][0] == '*')
+	if (piece.map[0][0] == 1)
 		ans = set_piece(filler, piece, my_points);
-	//else
-	//	ans = set_badpiece(filler, piece);
+	else
+		ans = set_badpiece(filler, piece);
 	free_table((void **)piece.map, piece.count_y - 1);
 /*
 	int k =0;
