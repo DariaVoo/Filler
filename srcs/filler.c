@@ -45,11 +45,12 @@ int main(void)
 	if (fd != -1)
 	{
 		parse_filler(&filler, fd);
-		if (filler.player1_me == 'O')
+		//if (filler.player1_me == 'O')
 			logic(&filler, fd);
 		//skip map
 		while (skip_map(fd) >= 0)
 		{
+			//ft_printf("%k", "blue");
 			//logic(&filler, fd);
 			if (logic(&filler, fd) < 0)
 				return (0);

@@ -150,21 +150,23 @@ int 	check_square(t_map filler, t_map piece, int m_x, int m_y)
 	return (1);
 }
 
-t_big_sqr	new_big_sqr(void)
+t_big_sqr	*new_big_sqr(void)
 {
-	t_big_sqr b;
+	t_big_sqr *b;
 
-	b.square = 0;
-	b.x = -1;
-	b.y = -1;
+	if (!(b =  (t_big_sqr *)malloc(sizeof(t_big_sqr))))
+		return (NULL);
+	b->square = 0;
+	b->x = -1;
+	b->y = -1;
 	return (b);
 }
 
-int set_piece(t_filler *filler, t_map piece, int *my_points)
+t_big_sqr *set_piece(t_filler *filler, t_map piece, int *my_points)
 {
 	//когда я не могу поставить фигуру -> -1 -1
 	int k;
-	t_big_sqr	sq;
+	t_big_sqr	*sq;
 	int		buf_sqr;
 
 	k = 0;
@@ -172,23 +174,23 @@ int set_piece(t_filler *filler, t_map piece, int *my_points)
 	while (k < filler->count_points_p1_me * 2)
 	{
 		if (check_set_piece(filler->map, piece, my_points[k + 1], my_points[k]))
-			if ((buf_sqr = check_square(filler->map, piece, my_points[k], my_points[k + 1]) > sq.square))
+			if ((buf_sqr = check_square(filler->map, piece, my_points[k], my_points[k + 1]) > sq->square))
 			{
-				sq.square = buf_sqr;
-				sq.x = my_points[k];
-				sq.y = my_points[k + 1];
+				sq->square = buf_sqr;
+				sq->x = my_points[k];
+				sq->y = my_points[k + 1];
 			}
 		k += 2;
 	}
 	//ft_printf("ANSWER\n");
-	ft_printf("%d %d\n", sq.x, sq.y);
-	return (sq.x);
+
+	return (sq);
 }
 
-int set_badpiece(t_filler *filler, t_map piece)
+t_big_sqr *set_badpiece(t_filler *filler, t_map piece)
 {
 	//когда я не могу поставить фигуру -> -1 -1
-	t_big_sqr	sq;
+	t_big_sqr	*sq;
 	int		buf_sqr;
 	int i;
 	int j;
@@ -202,11 +204,11 @@ int set_badpiece(t_filler *filler, t_map piece)
 		while (j < filler->map.count_x)
 		{
 			if (check_set_piece(filler->map, piece, j, i))
-				if ((buf_sqr = check_square(filler->map, piece, i, j) > sq.square))
+				if ((buf_sqr = check_square(filler->map, piece, i, j) > sq->square))
 				{
-					sq.square = buf_sqr;
-					sq.x = i;
-					sq.y = j;
+					sq->square = buf_sqr;
+					sq->x = i;
+					sq->y = j;
 				}
 			j++;
 		}
@@ -214,16 +216,16 @@ int set_badpiece(t_filler *filler, t_map piece)
 	}
 
 	//ft_printf("ANSWER\n");
-	ft_printf("%d %d\n", sq.x, sq.y);
-	return (sq.x);
+	//ft_printf("%d %d\n", sq.x, sq.y);
+	return (sq);
 }
 
 int	logic(t_filler *filler, int fd)
 {
-	int 	*p2_points;
-	int 	*my_points;
-	t_map	piece;
-	int		ans;
+	int				*p2_points;
+	int				*my_points;
+	t_map			piece;
+	t_big_sqr		*ans;
 
 	fill_map_filler(&filler, fd);
 	p2_points = get_positions(filler->count_points_p2 * 2, filler->map, -2);
@@ -231,7 +233,11 @@ int	logic(t_filler *filler, int fd)
 	filler = set_distance_on_map(filler, p2_points);
 	piece = get_piece(fd);
 	if (piece.map[0][0] == 1)
+	{
 		ans = set_piece(filler, piece, my_points);
+		if (ans->x < 0)
+			ans = set_badpiece(filler, piece);
+	}
 	else
 		ans = set_badpiece(filler, piece);
 	free_table((void **)piece.map, piece.count_y - 1);
@@ -249,7 +255,8 @@ int	logic(t_filler *filler, int fd)
  */
 	free(p2_points);
 	free(my_points);
-	return (ans);
+	ft_printf("%d %d\n", ans->x, ans->y);
+	return (ans->x);
 }
 
 int	skip_map(int fd)
