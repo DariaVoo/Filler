@@ -50,7 +50,7 @@ t_map		new_map(void);
 int			logic(t_filler *filler, int fd);
 t_filler	*parse_filler(t_filler *filler, int fd);
 int			**create_table(int n, int m);
-void 		fill_map_filler(t_filler **filler, int fd);
+int 		fill_map_filler(t_filler **filler, int fd);
 t_map		*create_map(t_map *mmap, int fd, const char *word);
 
 //logic

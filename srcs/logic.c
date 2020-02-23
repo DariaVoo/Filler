@@ -201,7 +201,9 @@ int	logic(t_filler *filler, int fd)
 	t_map	piece;
 	int 	ans;
 
-	fill_map_filler(&filler, fd);
+
+	if (!fill_map_filler(&filler, fd))
+		return (-1);
 	p2_points = get_positions(filler->count_points_p2 * 2, filler->map, -2);
 	my_points = get_positions(filler->count_points_p1_me * 2, filler->map, -1);
 	filler = set_distance_on_map(filler, p2_points);

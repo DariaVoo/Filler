@@ -31,18 +31,22 @@ int			**create_table(int n, int m)
 	return (ans);
 }
 
-void	fill_map_filler(t_filler **filler, int fd)
+int		fill_map_filler(t_filler **filler, int fd)
 {
 	int	i;
 	int j;
 	char	*line;
 
 	i = 0;
-	get_next_line(fd, &line);
 	(*filler)->count_points_p1_me = 0;
 	(*filler)->count_points_p2 = 0;
-	free(line);
-	while (i < (*filler)->map.count_y)
+	while (get_next_line(fd, &line) && line[0] != '0')
+	{
+		free(line);
+	}
+	if (!line || line[0] != '0')
+		return (0);
+	while (i < (*filler)->map.count_y - 1)
 	{
 		get_next_line(fd, &line);
 		j = 4;
@@ -65,6 +69,7 @@ void	fill_map_filler(t_filler **filler, int fd)
 		i++;
 		free(line);
 	}
+	return (1);
 /*
 	ft_printf("MAP\n");
 	i = 0;
