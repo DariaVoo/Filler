@@ -162,7 +162,7 @@ t_big_sqr	new_big_sqr(void)
 	return (b);
 }
 
-int	set_badpiece(t_filler *filler, t_map piece)
+int	set_piece(t_filler *filler, t_map piece)
 {
 	//когда я не могу поставить фигуру -> -1 -1
 	t_big_sqr	sq;
@@ -206,7 +206,7 @@ int	logic(t_filler *filler, int fd)
 	my_points = get_positions(filler->count_points_p1_me * 2, filler->map, -1);
 	filler = set_distance_on_map(filler, p2_points);
 	piece = get_piece(fd);
-	ans = set_badpiece(filler, piece);
+	ans = set_piece(filler, piece);
 	free_table((void **)piece.map, piece.count_y - 1);
 	free(p2_points);
 	free(my_points);

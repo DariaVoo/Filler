@@ -59,7 +59,7 @@ t_filler	*set_distance_on_map(t_filler *filler, int *points_p2);
 t_map 		get_piece(int fd);
 
 int			skip_map(int fd);
-int			set_badpiece(t_filler *filler, t_map piece);
+int			set_piece(t_filler *filler, t_map piece);
 int 		check_set_piece(t_map filler, t_map piece, int m_x, int m_y);
 int 		check_square(t_map filler, t_map piece, int m_x, int m_y);
 
