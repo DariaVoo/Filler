@@ -41,19 +41,18 @@ int main(void)
 
 	filler = new_filler();
 	fd = 0;
-	fd = open("../test", O_RDONLY);
+	fd = open("../lel", O_RDONLY);
 	if (fd != -1)
 	{
 		parse_filler(&filler, fd);
-		if (logic(&filler, fd) < 0)
-			return (0);
-		//skip map
-		while (skip_map(fd) >= 0)
+		while (1)
 		{
 			if (logic(&filler, fd) < 0)
+			{
+				free_table((void **)filler.map.map, filler.map.count_y - 1);
 				return (0);
+			}
 		}
-		free_table((void **)filler.map.map, filler.map.count_y - 1);
 	}
 	close(fd);
 	return (0);
