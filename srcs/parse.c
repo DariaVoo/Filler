@@ -143,16 +143,6 @@ void	fill_piece(t_map *map, int fd)
 
 }
 
-t_map 	get_piece(int fd)
-{
-	t_map	piece;
-
-	piece = new_map();
-	create_map(&piece, fd, "Piece");
-	fill_piece(&piece, fd);
-	return (piece);
-}
-
 t_filler	*parse_filler(t_filler *filler, int fd)
 {
 	char		*line;

@@ -24,7 +24,7 @@ HEADERS = $(addprefix $(HEADERS_DIR), $(HEADERS_LST))
 INCLUDES := -I $(HEADERS_DIR) -I $(LIBFT_HEADERS)
 
 SRCS_DIR = srcs/
-SRCS_LST =  filler.c parse.c logic.c new_structs.c
+SRCS_LST =  filler.c parse.c logic.c new_structs.c piece.c
 SRCS = $(addprefix $(SRCS_DIR), $(SRCS_LST))
 
 OBJ_DIR = objects/
