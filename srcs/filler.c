@@ -50,8 +50,6 @@ int main(void)
 		//skip map
 		while (skip_map(fd) >= 0)
 		{
-			//ft_printf("%k", "blue");
-			//logic(&filler, fd);
 			if (logic(&filler, fd) < 0)
 				return (0);
 		}
