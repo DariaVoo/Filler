@@ -121,7 +121,7 @@ void	fill_pice(t_map *map, int fd)
 		i++;
 		free(line);
 	}
-/*
+
 	ft_printf("PIECE\n");
 	i = 0;
 	while (i < map->count_y)
@@ -135,7 +135,7 @@ void	fill_pice(t_map *map, int fd)
 		ft_putchar('\n');
 		i++;
 	}
-*/
+
 }
 
 t_map 	get_piece(int fd)
@@ -176,10 +176,7 @@ t_filler	*parse_filler(t_filler *filler, int fd)
 		}
 		free(line);
 	}
-	/*if (line)
-		free(line);*/
-//	ft_printf("ME %c HE %c\n",filler->player1_me, filler->player2);
+	ft_printf("ME %c HE %c\n",filler->player1_me, filler->player2);
 	create_map(&filler->map, fd, "Plateau");
-	//free(line);
 	return (filler);
 }

@@ -41,12 +41,14 @@ int main(void)
 
 	filler = new_filler();
 	fd = 0;
-	//fd = open("../test", O_RDONLY);
+	fd = open("../lel", O_RDONLY);
 	if (fd != -1)
 	{
 		parse_filler(&filler, fd);
+
 		//if (filler.player1_me == 'O')
-			logic(&filler, fd);
+		if (logic(&filler, fd) < 0)
+			return (0);
 		//skip map
 		while (skip_map(fd) >= 0)
 		{

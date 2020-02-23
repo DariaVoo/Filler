@@ -122,4 +122,5 @@ add_executable(Filler
         srcs/filler.c
         srcs/logic.c
         srcs/parse.c
-        test)
+        test
+        lel)

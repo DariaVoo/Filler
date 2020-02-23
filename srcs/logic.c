@@ -46,7 +46,7 @@ t_filler	*set_distance_on_map(t_filler *filler, int *points_p2)
 		}
 		i++;
 	}
-/*
+
 	ft_printf("TERMOMAP\n");
 	i = 0;
 	while (i < filler->map.count_y)
@@ -60,7 +60,7 @@ t_filler	*set_distance_on_map(t_filler *filler, int *points_p2)
 		ft_putchar('\n');
 		i++;
 	}
-*/
+
 	return (filler);
 }
 
@@ -135,7 +135,6 @@ int 	check_square(t_map filler, t_map piece, int m_x, int m_y)
 	int		square;
 
 	i = 0;
-	j = 0;
 	square = 0;
 	while (i < piece.count_y && i + m_y < filler.count_y)
 	{
@@ -148,6 +147,17 @@ int 	check_square(t_map filler, t_map piece, int m_x, int m_y)
 		}
 		i++;
 	}
+//	while (i < piece.count_y && i + m_y < filler.count_y)
+//	{
+//		j = 0;
+//		while (j < piece.count_x && j + m_x < filler.count_x)
+//		{
+//			if (piece.map[i][j] == 1 && filler.map[i + m_y][j + m_x] != -1 && filler.map[i + m_y][j + m_x] != -2)
+//				square += filler.map[i + m_y][j + m_x];
+//			j++;
+//		}
+//		i++;
+//	}
 //	ft_printf("square from func = %d\n", square);
 	if (square == 0)
 		return (INT32_MAX);
@@ -178,7 +188,7 @@ t_big_sqr *set_piece(t_filler *filler, t_map piece, int *my_points)
 	while (k < filler->count_points_p1_me * 2)
 	{
 		if (check_set_piece(filler->map, piece, my_points[k + 1], my_points[k]))
-			if ((buf_sqr = check_square(filler->map, piece, my_points[k], my_points[k + 1]) < sq->square))
+			if ((buf_sqr = check_square(filler->map, piece, my_points[k + 1], my_points[k]) < sq->square))
 			{
 				sq->square = buf_sqr;
 				sq->x = my_points[k];
@@ -187,7 +197,6 @@ t_big_sqr *set_piece(t_filler *filler, t_map piece, int *my_points)
 		k += 2;
 	}
 	//ft_printf("ANSWER\n");
-
 	return (sq);
 }
 
@@ -208,9 +217,9 @@ t_big_sqr *set_badpiece(t_filler *filler, t_map piece)
 		while (j < filler->map.count_x)
 		{
 			if (check_set_piece(filler->map, piece, j, i))
-				if ((buf_sqr = check_square(filler->map, piece, i, j)) < sq->square)
+				if ((buf_sqr = check_square(filler->map, piece, j, i)) < sq->square)
 				{
-//					ft_printf("min square = %d\n", buf_sqr);
+					ft_printf("min square = %d\n", buf_sqr);
 					sq->square = buf_sqr;
 					sq->x = i;
 					sq->y = j;
@@ -219,7 +228,6 @@ t_big_sqr *set_badpiece(t_filler *filler, t_map piece)
 		}
 		i++;
 	}
-
 	//ft_printf("ANSWER\n");
 	//ft_printf("%d %d\n", sq.x, sq.y);
 	return (sq);
@@ -237,19 +245,6 @@ int	logic(t_filler *filler, int fd)
 	my_points = get_positions(filler->count_points_p1_me * 2, filler->map, -1);
 	filler = set_distance_on_map(filler, p2_points);
 	piece = get_piece(fd);
-//	ft_printf("TERMOMAP\n");
-//	int i = 0;
-//	while (i < filler->map.count_y)
-//	{
-//		int j = 0;
-//		while (j < filler->map.count_x)
-//		{
-//			ft_printf("%4d ", filler->map.map[i][j]);
-//			j++;
-//		}
-//		ft_putchar('\n');
-//		i++;
-//	}
 //	if (piece.map[0][0] == 1)
 //	{
 //		//ans = set_piece(filler, piece, my_points);
@@ -259,18 +254,7 @@ int	logic(t_filler *filler, int fd)
 //	else
 		ans = set_badpiece(filler, piece);
 	free_table((void **)piece.map, piece.count_y - 1);
-/*
-	int k =0;
-	while (k + 1 < filler->count_points_p2 * 2) {
-		ft_printf("p2 %d %d\n", p2_points[k], p2_points[k + 1]);
-		k += 2;
-	}
-	k = 0;
-	while (k + 1 < filler->count_points_p1_me * 2) {
-		ft_printf("me %d %d\n", my_points[k], my_points[k + 1]);
-		k += 2;
-	}
- */
+
 	free(p2_points);
 	free(my_points);
 	ft_printf("%d %d\n", ans->x, ans->y);
@@ -284,7 +268,6 @@ int	skip_map(int fd)
 	get_next_line(fd, &line);
 	if (line[0] == '<')
 	{
-		//ft_printf("line %s\n", line);
 		free(line);
 		get_next_line(fd, &line);
 		if (line[0] == '=')
@@ -298,15 +281,17 @@ int	skip_map(int fd)
 	return (0);
 }
 
-	/*Вывод координат
-		 * while (k + 1 < filler->count_points_p2 * 2) {
-			ft_printf("%d %d\n", p2_points[k], p2_points[k + 1]);
-			k += 2;
-		}
-		k = 0;
-		ft_printf("MEEEEEEEEEEEEEEEEEEEEEEE\n");
-		while (k + 1 < filler->count_points_p1_me * 2) {
-			ft_printf("%d %d\n", my_points[k], my_points[k + 1]);
-			k += 2;
-		}*/
+/*
+	int k =0;
+	while (k + 1 < filler->count_points_p2 * 2) {
+		ft_printf("p2 %d %d\n", p2_points[k], p2_points[k + 1]);
+		k += 2;
+	}
+	k = 0;
+	while (k + 1 < filler->count_points_p1_me * 2) {
+		ft_printf("me %d %d\n", my_points[k], my_points[k + 1]);
+		k += 2;
+	}
+ */
+
 
