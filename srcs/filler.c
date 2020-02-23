@@ -19,7 +19,7 @@ int	main(void)
 
 	filler = new_filler();
 	fd = 0;
-	fd = open("../lel", O_RDONLY);
+	fd = open("lel", O_RDONLY);
 	if (fd != -1)
 	{
 		parse_filler(&filler, fd);
