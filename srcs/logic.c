@@ -96,7 +96,7 @@ int	*get_positions(int count, t_map map, int idplayer)
 	return (positions);
 }
 
-int 	check_set_piece(t_map filler, t_map piece, int m_x, int m_y)
+int check_set_piece(t_map filler, t_map piece, int m_x, int m_y)
 {
 	int i;
 	int j;
@@ -128,7 +128,7 @@ int 	check_set_piece(t_map filler, t_map piece, int m_x, int m_y)
 	return (count_cross);
 }
 
-int 	check_square(t_map filler, t_map piece, int m_x, int m_y)
+int check_square(t_map filler, t_map piece, int m_x, int m_y)
 {
 	int i;
 	int j;
@@ -141,7 +141,8 @@ int 	check_square(t_map filler, t_map piece, int m_x, int m_y)
 		j = 0;
 		while (j < piece.count_x && j + m_x < filler.count_x)
 		{
-			if (piece.map[i][j] == 1 && filler.map[i + m_y][j + m_x] != -1 && filler.map[i + m_y][j + m_x] != -2)
+			if (piece.map[i][j] == 1 && filler.map[i + m_y][j + m_x] != -1
+				&& filler.map[i + m_y][j + m_x] != -2)
 				square += filler.map[i + m_y][j + m_x];
 			j++;
 		}
@@ -150,16 +151,6 @@ int 	check_square(t_map filler, t_map piece, int m_x, int m_y)
 	if (square == 0)
 		return (INT32_MAX);
 	return (square);
-}
-
-t_big_sqr	new_big_sqr(void)
-{
-	t_big_sqr b;
-
-	b.square = INT32_MAX;
-	b.x = -1;
-	b.y = -1;
-	return (b);
 }
 
 int	set_piece(t_filler *filler, t_map piece)

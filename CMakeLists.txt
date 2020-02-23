@@ -122,5 +122,6 @@ add_executable(Filler
         srcs/filler.c
         srcs/logic.c
         srcs/parse.c
+        srcs/new_structs.c
         test
         lel)

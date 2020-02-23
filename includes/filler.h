@@ -47,6 +47,8 @@ typedef struct	s_big_sqr
 
 t_filler	new_filler(void);
 t_map		new_map(void);
+t_big_sqr	new_big_sqr(void);
+
 int			logic(t_filler *filler, int fd);
 t_filler	*parse_filler(t_filler *filler, int fd);
 int			**create_table(int n, int m);

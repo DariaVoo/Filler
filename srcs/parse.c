@@ -12,7 +12,7 @@
 
 #include "filler.h"
 
-int			**create_table(int n, int m)
+int		**create_table(int n, int m)
 {
 	int **ans;
 	int i;
@@ -103,7 +103,7 @@ t_map	*create_map(t_map *mmap, int fd, const char *word)
 	return (mmap);
 }
 
-void	fill_pice(t_map *map, int fd)
+void	fill_piece(t_map *map, int fd)
 {
 
 	int	i;
@@ -148,11 +148,8 @@ t_map 	get_piece(int fd)
 	t_map	piece;
 
 	piece = new_map();
-	//ft_printf("newmap\n");
 	create_map(&piece, fd, "Piece");
-	//ft_printf("create map\n");
-	fill_pice(&piece, fd);
-	//ft_printf("fiil piece\n");
+	fill_piece(&piece, fd);
 	return (piece);
 }
 
@@ -160,8 +157,6 @@ t_filler	*parse_filler(t_filler *filler, int fd)
 {
 	char		*line;
 
-	//get_next_line(fd, &line);
-	//free(line);
 	while (get_next_line(fd, &line))
 	{
 		if (*line == '$')
