@@ -12,7 +12,7 @@
 
 #include "filler.h"
 
-int 	ft_abs(int n)
+int			ft_abs(int n)
 {
 	if (n < 0)
 		return (n * (-1));
@@ -64,7 +64,7 @@ t_filler	*set_distance_on_map(t_filler *filler, int *points_p2)
 	return (filler);
 }
 
-int	*get_positions(int count, t_map map, int idplayer)
+int			*get_positions(int count, t_map map, int idplayer)
 {
 	int	*positions;
 	int	i;
@@ -96,7 +96,7 @@ int	*get_positions(int count, t_map map, int idplayer)
 	return (positions);
 }
 
-int	logic(t_filler *filler, int fd)
+int			logic(t_filler *filler, int fd)
 {
 	int		*p2_points;
 	t_map	piece;

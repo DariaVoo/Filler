@@ -12,7 +12,7 @@
 
 #include "filler.h"
 
-int		**create_table(int n, int m)
+int			**create_table(int n, int m)
 {
 	int **ans;
 	int i;
@@ -31,7 +31,7 @@ int		**create_table(int n, int m)
 	return (ans);
 }
 
-int		fill_map_filler(t_filler **filler, int fd)
+int			fill_map_filler(t_filler **filler, int fd)
 {
 	int	i;
 	int j;
@@ -87,7 +87,7 @@ int		fill_map_filler(t_filler **filler, int fd)
 */
 }
 
-t_map	*create_map(t_map *mmap, int fd, const char *word)
+t_map		*create_map(t_map *mmap, int fd, const char *word)
 {
 	char	**buf;
 	char	*line;
@@ -101,46 +101,6 @@ t_map	*create_map(t_map *mmap, int fd, const char *word)
 	free_table((void**)buf, 2);
 	free(line);
 	return (mmap);
-}
-
-void	fill_piece(t_map *map, int fd)
-{
-
-	int	i;
-	int j;
-	char	*line;
-
-	i = 0;
-	line = NULL;//lose
-	while (i < map->count_y && get_next_line(fd, &line))
-	{
-		j = 0;
-		while (j < map->count_x)
-		{
-				if (line[j] == '*')
-					map->map[i][j] = 1;
-				else
-					map->map[i][j] = 0;
-				j++;
-		}
-		i++;
-		free(line);
-	}
-
-	ft_printf("PIECE\n");
-	i = 0;
-	while (i < map->count_y)
-	{
-		j = 0;
-		while (j < map->count_x)
-		{
-			ft_printf("%3d", map->map[i][j]);
-			j++;
-		}
-		ft_putchar('\n');
-		i++;
-	}
-
 }
 
 t_filler	*parse_filler(t_filler *filler, int fd)

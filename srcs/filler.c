@@ -12,7 +12,7 @@
 
 #include "filler.h"
 
-int main(void)
+int	main(void)
 {
 	t_filler filler;
 	int fd;

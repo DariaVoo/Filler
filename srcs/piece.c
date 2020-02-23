@@ -1,6 +1,6 @@
 #include "filler.h"
 
-int check_set_piece(t_map filler, t_map piece, int m_x, int m_y)
+int		check_set_piece(t_map filler, t_map piece, int m_x, int m_y)
 {
 	int i;
 	int j;
@@ -32,7 +32,7 @@ int check_set_piece(t_map filler, t_map piece, int m_x, int m_y)
 	return (count_cross);
 }
 
-int check_square(t_map filler, t_map piece, int m_x, int m_y)
+int		check_square(t_map filler, t_map piece, int m_x, int m_y)
 {
 	int i;
 	int j;
@@ -57,7 +57,7 @@ int check_square(t_map filler, t_map piece, int m_x, int m_y)
 	return (square);
 }
 
-int	set_piece(t_filler *filler, t_map piece)
+int		set_piece(t_filler *filler, t_map piece)
 {
 	//когда я не могу поставить фигуру -> -1 -1
 	t_big_sqr	sq;
@@ -87,6 +87,46 @@ int	set_piece(t_filler *filler, t_map piece)
 	}
 	ft_printf("%d %d\n", sq.x, sq.y);
 	return (sq.x);
+}
+
+void	fill_piece(t_map *map, int fd)
+{
+
+	int	i;
+	int j;
+	char	*line;
+
+	i = 0;
+	line = NULL;//lose
+	while (i < map->count_y && get_next_line(fd, &line))
+	{
+		j = 0;
+		while (j < map->count_x)
+		{
+			if (line[j] == '*')
+				map->map[i][j] = 1;
+			else
+				map->map[i][j] = 0;
+			j++;
+		}
+		i++;
+		free(line);
+	}
+
+	ft_printf("PIECE\n");
+	i = 0;
+	while (i < map->count_y)
+	{
+		j = 0;
+		while (j < map->count_x)
+		{
+			ft_printf("%3d", map->map[i][j]);
+			j++;
+		}
+		ft_putchar('\n');
+		i++;
+	}
+
 }
 
 t_map 	get_piece(int fd)
