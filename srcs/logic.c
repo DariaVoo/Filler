@@ -215,26 +215,6 @@ int	logic(t_filler *filler, int fd)
 	return (ans);
 }
 
-int	skip_map(int fd)
-{
-	char	*line;
-
-	get_next_line(fd, &line);
-	if (line[0] == '<')
-	{
-		free(line);
-		get_next_line(fd, &line);
-		if (line[0] == '=')
-		{
-			free(line);
-			return (-1);
-		}
-		free(line);
-		return (1);
-	}
-	return (0);
-}
-
 /*
 	int k =0;
 	while (k + 1 < filler->count_points_p2 * 2) {
