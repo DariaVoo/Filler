@@ -33,12 +33,11 @@ int			**create_table(int n, int m)
 
 int			fill_map_filler(t_filler **filler, int fd)
 {
-	int	i;
-	int j;
+	int		i;
+	int		j;
 	char	*line;
 
 	i = 0;
-	(*filler)->count_points_p1_me = 0;
 	(*filler)->count_points_p2 = 0;
 	while (get_next_line(fd, &line) && line[0] != '0')
 		free(line);
@@ -46,15 +45,12 @@ int			fill_map_filler(t_filler **filler, int fd)
 		return (0);
 	while (i < (*filler)->map.count_y && line)
 	{
-		j = 4;
-		while (j < (*filler)->map.count_x + 4 && line)
+		j = 3;
+		while (++j < (*filler)->map.count_x + 4 && line)
 		{
 			if (line[j] == (*filler)->player1_me ||
 					line[j] == (*filler)->player1_me + 32)
-			{
 				(*filler)->map.map[i][j - 4] = -1;
-				(*filler)->count_points_p1_me++;
-			}
 			else if (line[j] == (*filler)->player2 ||
 					line[j] == (*filler)->player2 + 32)
 			{
@@ -63,7 +59,6 @@ int			fill_map_filler(t_filler **filler, int fd)
 			}
 			else
 				(*filler)->map.map[i][j - 4] = 0;
-			j++;
 		}
 		i++;
 		free(line);

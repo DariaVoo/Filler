@@ -33,7 +33,6 @@ typedef struct	s_filler
 	char 	player1_me;//always -1 on map
 	char 	player2;
 	int 	count_points_p2;
-	int 	count_points_p1_me;
 }				t_filler;
 
 
