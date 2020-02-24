@@ -47,19 +47,19 @@ t_filler	*set_distance_on_map(t_filler *filler, int *points_p2)
 		i++;
 	}
 
-	ft_printf("TERMOMAP\n");
-	i = 0;
-	while (i < filler->map.count_y)
-	{
-		j = 0;
-		while (j < filler->map.count_x)
-		{
-			ft_printf("%4d ", filler->map.map[i][j]);
-			j++;
-		}
-		ft_putchar('\n');
-		i++;
-	}
+//	ft_printf("TERMOMAP\n");
+//	i = 0;
+//	while (i < filler->map.count_y)
+//	{
+//		j = 0;
+//		while (j < filler->map.count_x)
+//		{
+//			ft_printf("%4d ", filler->map.map[i][j]);
+//			j++;
+//		}
+//		ft_putchar('\n');
+//		i++;
+//	}
 
 	return (filler);
 }
@@ -95,7 +95,20 @@ int			*get_positions(int count, t_map map, int idplayer)
 	}
 	return (positions);
 }
+void	free_map(int **arr, int position)
+{
+	int	i;
 
+	i = 0;
+	while (i < position - 1)
+	{
+		free(arr[i]);
+		arr[i] = NULL;
+		i++;
+	}
+	free(arr);
+	arr = NULL;
+}
 int			logic(t_filler *filler, int fd)
 {
 	int		*p2_points;
@@ -108,8 +121,10 @@ int			logic(t_filler *filler, int fd)
 	p2_points = get_positions(filler->count_points_p2 * 2, filler->map, -2);
 	filler = set_distance_on_map(filler, p2_points);
 	piece = get_piece(fd);
+	if (!piece.count_x)
+		return (-1);
 	ans = set_piece(filler, piece);
-	free_table((void **)piece.map, piece.count_y - 1);
+	free_map(piece.map, piece.count_y);
 	free(p2_points);
 	return (ans);
 }

@@ -46,6 +46,7 @@ typedef struct	s_big_sqr
 
 int			ft_abs(int n);
 
+void	free_map(int **arr, int position);
 t_filler	new_filler(void);
 t_map		new_map(void);
 t_big_sqr	new_big_sqr(void);

@@ -17,7 +17,7 @@ void	free_table(void **arr, int position)
 	int	i;
 
 	i = 0;
-	while (i <= position)
+	while (i < position)
 	{
 		free(arr[i]);
 		arr[i] = NULL;

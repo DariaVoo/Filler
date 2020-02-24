@@ -27,7 +27,7 @@ int			**create_table(int n, int m)
 			return (NULL);
 		}
 		else
-			ft_memset(ans[i], 0, n);
+			ft_memset(ans[i], 0, m);
 	return (ans);
 }
 
@@ -41,14 +41,11 @@ int			fill_map_filler(t_filler **filler, int fd)
 	(*filler)->count_points_p1_me = 0;
 	(*filler)->count_points_p2 = 0;
 	while (get_next_line(fd, &line) && line[0] != '0')
-	{
 		free(line);
-	}
 	if (!line || line[0] != '0')
 		return (0);
-	while (i < (*filler)->map.count_y - 1)
+	while (i < (*filler)->map.count_y && line)
 	{
-		get_next_line(fd, &line);
 		j = 4;
 		while (j < (*filler)->map.count_x + 4 && line)
 		{
@@ -68,6 +65,8 @@ int			fill_map_filler(t_filler **filler, int fd)
 		}
 		i++;
 		free(line);
+		if (i < (*filler)->map.count_y)
+			get_next_line(fd, &line);
 	}
 	return (1);
 /*
@@ -94,11 +93,13 @@ t_map		*create_map(t_map *mmap, int fd, const char *word)
 
 	while (get_next_line(fd, &line) && !ft_strstr(line, word))
 		free(line);
+	if (!line)
+		return (mmap);
 	buf = ft_strsplit(line, ' ');
 	mmap->count_x = ft_atoi(buf[2]);
 	mmap->count_y = ft_atoi(buf[1]);
 	mmap->map = create_table(mmap->count_y, mmap->count_x);
-	free_table((void**)buf, 2);
+//	free_table((void**)buf, 2);
 	free(line);
 	return (mmap);
 }
@@ -126,7 +127,7 @@ t_filler	*parse_filler(t_filler *filler, int fd)
 		}
 		free(line);
 	}
-	ft_printf("ME %c HE %c\n",filler->player1_me, filler->player2);
+//	ft_printf("ME %c HE %c\n",filler->player1_me, filler->player2);
 	create_map(&filler->map, fd, "Plateau");
 	return (filler);
 }

@@ -76,7 +76,7 @@ int		set_piece(t_filler *filler, t_map piece)
 			if (check_set_piece(filler->map, piece, j, i))
 				if ((buf_sqr = check_square(filler->map, piece, j, i)) < sq.square)
 				{
-					ft_printf("min square = %d\n", buf_sqr);
+//					ft_printf("min square = %d\n", buf_sqr);
 					sq.square = buf_sqr;
 					sq.x = i;
 					sq.y = j;
@@ -112,7 +112,7 @@ void	fill_piece(t_map *map, int fd)
 		i++;
 		free(line);
 	}
-
+/*
 	ft_printf("PIECE\n");
 	i = 0;
 	while (i < map->count_y)
@@ -126,7 +126,7 @@ void	fill_piece(t_map *map, int fd)
 		ft_putchar('\n');
 		i++;
 	}
-
+*/
 }
 
 t_map 	get_piece(int fd)
@@ -135,6 +135,8 @@ t_map 	get_piece(int fd)
 
 	piece = new_map();
 	create_map(&piece, fd, "Piece");
+	if (!piece.count_x || !piece.map)
+		return (piece);
 	fill_piece(&piece, fd);
 	return (piece);
 }
