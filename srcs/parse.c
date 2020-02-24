@@ -31,6 +31,21 @@ int			**create_table(int n, int m)
 	return (ans);
 }
 
+void		set_point_filler(t_filler **filler, int i, int j, char *line)
+{
+	if (line[j] == (*filler)->player1_me ||
+		line[j] == (*filler)->player1_me + 32)
+		(*filler)->map.map[i][j - 4] = -1;
+	else if (line[j] == (*filler)->player2 ||
+			line[j] == (*filler)->player2 + 32)
+	{
+		(*filler)->map.map[i][j - 4] = -2;
+		(*filler)->count_points_p2++;
+	}
+	else
+		(*filler)->map.map[i][j - 4] = 0;
+}
+
 int			fill_map_filler(t_filler **filler, int fd)
 {
 	int		i;
@@ -47,19 +62,7 @@ int			fill_map_filler(t_filler **filler, int fd)
 	{
 		j = 3;
 		while (++j < (*filler)->map.count_x + 4 && line)
-		{
-			if (line[j] == (*filler)->player1_me ||
-					line[j] == (*filler)->player1_me + 32)
-				(*filler)->map.map[i][j - 4] = -1;
-			else if (line[j] == (*filler)->player2 ||
-					line[j] == (*filler)->player2 + 32)
-			{
-				(*filler)->map.map[i][j - 4] = -2;
-				(*filler)->count_points_p2++;
-			}
-			else
-				(*filler)->map.map[i][j - 4] = 0;
-		}
+			set_point_filler(filler, i, j, line);
 		i++;
 		free(line);
 		if (i < (*filler)->map.count_y)
