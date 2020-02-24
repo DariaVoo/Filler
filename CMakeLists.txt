@@ -92,8 +92,6 @@ add_executable(Filler
         ft_printf/libft/ft_strstr.c
         ft_printf/libft/ft_strsub.c
         ft_printf/libft/ft_strtrim.c
-        ft_printf/libft/ft_swap_char.c
-        ft_printf/libft/ft_swap_int.c
         ft_printf/libft/ft_tolower.c
         ft_printf/libft/ft_toupper.c
         ft_printf/libft/get_next_line.c

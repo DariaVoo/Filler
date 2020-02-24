@@ -18,10 +18,8 @@
 # include <string.h>
 # include <limits.h>
 
-//# define BUFF_SIZE 500
 # define FD_MAX    10240
 # define BUFF_SIZE 1
-# define FD 10240
 
 char				*ft_itoadouble(long double n);
 void				free_table(void **arr, int position);

@@ -112,9 +112,8 @@ char				**ft_strsplit(char const *s, char c)
 	int		i;
 
 	i = -1;
-	if (!s || !c)
+	if (!s || !c || (strs = count_words(s, c)) < 0)
 		return (NULL);
-	strs = count_words(s, c);
 	if (!(ans = (char **)malloc(sizeof(char *) * (strs + 1))))
 		return (NULL);
 	if (strs == 0 || !(char_word = characters_in_word(s, strs, c)))
