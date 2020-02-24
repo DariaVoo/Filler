@@ -6,7 +6,7 @@
 /*   By: snorcros <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/08 03:56:49 by snorcros          #+#    #+#             */
-/*   Updated: 2020/02/08 03:56:50 by snorcros         ###   ########.fr       */
+/*   Updated: 2020/02/24 19:07:43 by snorcros         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,14 @@ int			fill_map_filler(t_filler **filler, int fd)
 		j = 4;
 		while (j < (*filler)->map.count_x + 4 && line)
 		{
-			if (line[j] == (*filler)->player1_me || line[j] == (*filler)->player1_me + 32)
+			if (line[j] == (*filler)->player1_me ||
+					line[j] == (*filler)->player1_me + 32)
 			{
 				(*filler)->map.map[i][j - 4] = -1;
 				(*filler)->count_points_p1_me++;
 			}
-			else if (line[j] == (*filler)->player2 || line[j] == (*filler)->player2 + 32)
+			else if (line[j] == (*filler)->player2 ||
+					line[j] == (*filler)->player2 + 32)
 			{
 				(*filler)->map.map[i][j - 4] = -2;
 				(*filler)->count_points_p2++;
@@ -69,21 +71,6 @@ int			fill_map_filler(t_filler **filler, int fd)
 			get_next_line(fd, &line);
 	}
 	return (1);
-/*
-	ft_printf("MAP\n");
-	i = 0;
-	while (i < (*filler)->map.count_y)
-	{
-		j = 0;
-		while (j < (*filler)->map.count_x)
-		{
-			ft_printf("%3d", (*filler)->map.map[i][j]);
-			j++;
-		}
-		ft_putchar('\n');
-		i++;
-	}
-*/
 }
 
 t_map		*create_map(t_map *mmap, int fd, const char *word)
@@ -99,7 +86,7 @@ t_map		*create_map(t_map *mmap, int fd, const char *word)
 	mmap->count_x = ft_atoi(buf[2]);
 	mmap->count_y = ft_atoi(buf[1]);
 	mmap->map = create_table(mmap->count_y, mmap->count_x);
-//	free_table((void**)buf, 2);
+	free_table((void**)buf, 2);
 	free(line);
 	return (mmap);
 }
@@ -127,7 +114,6 @@ t_filler	*parse_filler(t_filler *filler, int fd)
 		}
 		free(line);
 	}
-//	ft_printf("ME %c HE %c\n",filler->player1_me, filler->player2);
 	create_map(&filler->map, fd, "Plateau");
 	return (filler);
 }

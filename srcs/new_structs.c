@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   new_structs.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: snorcros <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/24 19:06:09 by snorcros          #+#    #+#             */
+/*   Updated: 2020/02/24 19:06:18 by snorcros         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "filler.h"
 
-t_map	new_map(void)
+t_map		new_map(void)
 {
 	t_map p;
 
@@ -10,7 +22,7 @@ t_map	new_map(void)
 	return (p);
 }
 
-t_filler new_filler(void)
+t_filler	new_filler(void)
 {
 	t_filler f;
 

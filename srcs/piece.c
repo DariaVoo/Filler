@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   piece.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: snorcros <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/02/24 19:07:56 by snorcros          #+#    #+#             */
+/*   Updated: 2020/02/24 19:08:29 by snorcros         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "filler.h"
 
 int		check_set_piece(t_map filler, t_map piece, int m_x, int m_y)
@@ -59,7 +71,6 @@ int		check_square(t_map filler, t_map piece, int m_x, int m_y)
 
 int		set_piece(t_filler *filler, t_map piece)
 {
-	//когда я не могу поставить фигуру -> -1 -1
 	t_big_sqr	sq;
 	int		buf_sqr;
 	int i;
@@ -74,9 +85,9 @@ int		set_piece(t_filler *filler, t_map piece)
 		while (j < filler->map.count_x)
 		{
 			if (check_set_piece(filler->map, piece, j, i))
-				if ((buf_sqr = check_square(filler->map, piece, j, i)) < sq.square)
+				if ((buf_sqr = check_square(filler->map, piece, j, i))
+							< sq.square)
 				{
-//					ft_printf("min square = %d\n", buf_sqr);
 					sq.square = buf_sqr;
 					sq.x = i;
 					sq.y = j;
@@ -112,21 +123,6 @@ void	fill_piece(t_map *map, int fd)
 		i++;
 		free(line);
 	}
-/*
-	ft_printf("PIECE\n");
-	i = 0;
-	while (i < map->count_y)
-	{
-		j = 0;
-		while (j < map->count_x)
-		{
-			ft_printf("%3d", map->map[i][j]);
-			j++;
-		}
-		ft_putchar('\n');
-		i++;
-	}
-*/
 }
 
 t_map 	get_piece(int fd)
