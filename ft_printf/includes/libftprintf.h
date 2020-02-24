@@ -18,12 +18,12 @@
 # include <inttypes.h>
 # include "header_double.h"
 
-# define FLG_NULL	0b00000000
-# define FLG_PLUS	0b00000001
-# define FLG_MINUS	0b00000010
-# define FLG_HASH	0b00000100
-# define FLG_SPACE	0b00001000
-# define FLG_ZERO	0b00010000
+# define FLG_NULL	0
+# define FLG_PLUS	1
+# define FLG_MINUS	2
+# define FLG_HASH	4
+# define FLG_SPACE	8
+# define FLG_ZERO	16
 
 typedef struct	s_funtype
 {
