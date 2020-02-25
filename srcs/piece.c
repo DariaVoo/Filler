@@ -89,7 +89,7 @@ int		set_piece(t_filler *filler, t_map piece)
 				}
 		}
 	}
-	ft_printf("%d %d\n", sq.x, sq.y);
+	print_ans(sq.x, sq.y);
 	return (sq.x);
 }
 

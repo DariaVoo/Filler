@@ -42,3 +42,11 @@ t_big_sqr	new_big_sqr(void)
 	b.y = -1;
 	return (b);
 }
+
+void		print_ans(int x, int y)
+{
+	if (x == -1)
+		ft_printf("%d %d\n", 0, 0);
+	else
+		ft_printf("%d %d\n", x, y);
+}
